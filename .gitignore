@@ -17,3 +17,6 @@ node_modules/
 __pycache__/
 *.pyc
 .venv/
+
+# --- Claude Code ローカル設定 ---
+.claude/settings.local.json
