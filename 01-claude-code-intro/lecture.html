@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>Lecture 01 — なぜ今、Claude Code を学ぶのか</title>
+
+<!--
+  ============================================================
+  Lecture 01: なぜ今、Claude Code を学ぶのか
+  AI Coding Series for fellow students at Kochi Univ. of Tech.
+
+  この HTML は人間と AI（Claude Code / Codex 等）が一緒に読むことを
+  前提に作られています。AI に「このファイルを読んで」と渡せば、
+  シリーズ全体の文脈を共有できます。
+
+  Author : 渡邊康平 (ko-dhinngumuzuiyoo)
+  Repo   : https://github.com/ko-dhinngumuzuiyoo/lectures
+  Status : DRAFT — 12 枚構成（誰のためか先頭、PC 操作フレーム）
+  ============================================================
+-->
+
+<link rel="stylesheet" href="../shared/theme.css">
+<script src="../shared/deck-stage.js"></script>
+<script src="../shared/progress-strip.js" defer></script>
+</head>
+<body>
+
+<deck-stage width="1920" height="1080">
+
+  <!-- ============================================================
+       Slide 1 — Cover
+       ============================================================ -->
+  <section data-label="Cover — なぜ今、Claude Code を学ぶのか">
+    <div class="cover">
+      <div class="cover-eyebrow">Lecture Series · 01</div>
+      <h1 class="cover-title">
+        なぜ今、<br>
+        Claude Code を<br>
+        学ぶのか
+      </h1>
+      <p class="cover-subtitle">
+        PC を AI が操作する時代へ。<br>
+        エンジニアでなくとも、知っておきたい話。
+      </p>
+    </div>
+
+    <div class="brand">
+      <span>渡邊康平 / 高知工科大学</span>
+      <span>2026</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Slide 2 — このドキュメントの読み方
+       ============================================================ -->
+  <section data-label="このドキュメントの読み方">
+    <div class="meta-line">
+      <span><span class="accent">Lecture 01</span> · How to read</span>
+      <span>02 / 10</span>
+    </div>
+
+    <div class="content">
+      <div class="content-eyebrow">Foreword</div>
+      <h2 class="content-title">このドキュメントの読み方</h2>
+      <p class="content-subtitle">
+        人間と AI、<strong>一緒に読み進める</strong>前提で作っています
+      </p>
+      <hr class="rule">
+
+      <div class="cols-2">
+        <div>
+          <div class="col-label">For Humans</div>
+          <div class="col-body">
+            <p>ブラウザで開いて、<strong>左右キー</strong>でスライドを進める。</p>
+            <p>隣に <code>Claude Code</code> / <code>ChatGPT</code> を置いて、気になる箇所は <strong>その場で深掘り</strong> してもらう。</p>
+          </div>
+        </div>
+
+        <div>
+          <div class="col-label">For AI Agents</div>
+          <div class="col-body">
+            <p>このスライドは <strong><code>HTML</code></strong>。AI が <strong>そのまま読めて、編集もできる</strong>。</p>
+            <p>間違いや古い情報を見つけたら、<strong>読み手の AI と一緒に修正・更新</strong> してください。資料は読者の手で育つ前提です。</p>
+          </div>
+        </div>
+      </div>
+
+      <p class="aside">
+        ※ この資料は <strong>概要のみ</strong>。詳細・具体は <strong>あなたの AI に聞いてください</strong>。1 枚あたり 1〜2 分、全体で約 25 分の想定。
+      </p>
+    </div>
+
+    <div class="brand">
+      <span>Lecture 01 · なぜ今、Claude Code を学ぶのか</span>
+      <span>How to read</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Slide 3 — モデル vs サービス（用語の整理）
+       ============================================================ -->
+  <section data-label="モデル vs サービス — 用語の整理">
+    <div class="meta-line">
+      <span><span class="accent">Chapter 1</span> · 用語の整理</span>
+      <span>03 / 10</span>
+    </div>
+
+    <div class="content">
+      <div class="content-eyebrow">そもそも「Claude」って、何を指している？</div>
+      <h2 class="content-title">モデル と サービス、別物です</h2>
+      <p class="content-subtitle">
+        Claude（モデル） / claude.ai（Web） / Claude Code（CLI） — まず整理する
+      </p>
+      <hr class="rule">
+
+      <img src="_assets/model-service-layers-v2.png" alt="AI モデルとサービスの層構造：MODEL (Claude/GPT/Gemini) → CLI (ターミナル画面) / 会話 Web アプリ (claude.ai のチャット画面) / API (コードエディタ画面)" style="width: 100%; max-width: 1500px; margin: 12px 0 16px 0; display: block;">
+
+      <p class="aside">
+        ※ <strong>中身（モデル）は同じでも、ラッピング（サービス）次第で できることが変わる</strong>。OpenAI 系も同じ構造（GPT モデル / ChatGPT / Codex CLI / API）。次のスライドで CLI が PC で何をやるのか、具体的に。
+      </p>
+    </div>
+
+    <div class="brand">
+      <span>Lecture 01</span>
+      <span>Chapter 1 · 用語の整理</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Slide 4 — Claude Code とは：PC で働く AI
+       ============================================================ -->
+  <section data-label="Claude Code とは — PC で働く AI">
+    <div class="meta-line">
+      <span><span class="accent">Chapter 2</span> · Claude Code とは</span>
+      <span>04 / 10</span>
+    </div>
+
+    <div class="content">
+      <div class="content-eyebrow">そもそも、Claude Code って何？</div>
+      <h2 class="content-title">チャットボットじゃない。「<em>AI 社員</em>」</h2>
+      <p class="content-subtitle">
+        会話する AI と、PC で働く AI ── <strong>役割が違う</strong>
+      </p>
+      <hr class="rule">
+
+      <div style="display: grid; grid-template-columns: 700px 1fr; gap: 56px; align-items: start; margin-top: 8px;">
+        <div>
+          <img src="_assets/horse-harness.png" alt="Anthropic 公式の比喩：Claude=馬、Claude Code=馬具" style="width: 100%; display: block;">
+          <p style="font-family: var(--font-sans); font-size: 17px; line-height: 1.55; color: var(--ink-mute); margin: 14px 0 0 0;">
+            ※ <strong>Anthropic 公式の比喩</strong>：<strong>Claude（モデル）= 馬</strong>、<strong>Claude Code = 馬具</strong>。同じ馬でも、馬具次第で「会話する馬」にも「<em>働ける馬</em>」にもなる。
+          </p>
+        </div>
+
+        <div style="font-family: var(--font-sans);">
+          <div style="margin-bottom: 32px;">
+            <div class="col-label" style="margin-bottom: 12px;">ChatGPT / claude.ai</div>
+            <p style="font-size: 26px; font-weight: 600; color: var(--ink); margin: 0 0 10px 0;">役割：<strong>「相談相手」</strong></p>
+            <p style="font-size: 20px; color: var(--ink-2); margin: 0 0 6px 0; line-height: 1.55;">会話するだけ。答えを返す → あなたがコピペで運ぶ。</p>
+            <p style="font-size: 18px; font-style: italic; color: var(--ink-mute); margin: 0; line-height: 1.5;">"メールで賢い人とやり取りする" ような距離感。</p>
+          </div>
+
+          <div>
+            <div class="col-label" style="margin-bottom: 12px; color: var(--clay-deep);">Claude Code</div>
+            <p style="font-family: var(--font-serif); font-size: 28px; font-weight: 500; color: var(--clay-deep); margin: 0 0 10px 0;">役割：<em>「AI 社員」</em></p>
+            <p style="font-size: 20px; color: var(--ink-2); margin: 0 0 6px 0; line-height: 1.55;">会話しない、<strong>動く</strong>。ファイルを <em>読み・書き・実行</em> する。</p>
+            <p style="font-size: 18px; font-style: italic; color: var(--ink-mute); margin: 0; line-height: 1.5;">"同僚が隣に座って一緒に作業する" ような距離感。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="brand">
+      <span>Lecture 01</span>
+      <span>Chapter 2 · Claude Code とは</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Slide 4 — AI コーディング 4 年史
+       ============================================================ -->
+  <section data-label="AI コーディング 4 年史 — 3 段で降りてきた">
+    <div class="meta-line">
+      <span><span class="accent">Chapter 3</span> · AI コーディング 4 年史</span>
+      <span>05 / 10</span>
+    </div>
+
+    <div class="content">
+      <div class="content-eyebrow">では、なぜ今こうなったか — 4 年を振り返る</div>
+      <h2 class="content-title">AI が、PC のどこまで触れるかの歴史</h2>
+      <p class="content-subtitle">
+        ブラウザ → エディタ → PC 全体。AI が触れる範囲が広がるたび、人間の役割が変わった
+      </p>
+      <hr class="rule">
+
+      <div class="timeline">
+        <div class="step active">
+          <div class="step-year">2022 / 11</div>
+          <div class="step-title">ChatGPT</div>
+          <div class="step-body">
+            AI は <strong>PC の外</strong>。<br>
+            <em>汎用</em> な会話相手。<br>
+            結果は人間が <strong>コピペで運ぶ</strong>。
+          </div>
+        </div>
+        <div class="step active">
+          <div class="step-year">2021 — 2024</div>
+          <div class="step-title">Copilot · Cursor</div>
+          <div class="step-body">
+            AI が <strong>エディタの中</strong>まで来た。<br>
+            ただし用途は <em>コーディングに特化</em>。<br>
+            一緒に「<strong>コードを書く</strong>」段階。
+          </div>
+        </div>
+        <div class="step active">
+          <div class="step-year">2024 —</div>
+          <div class="step-title">Claude Code</div>
+          <div class="step-body">
+            AI が <strong>PC そのもの</strong>を操作する。<br>
+            コーディングを超えた <em>汎用 PC 操作</em>。<br>
+            <strong>PC のコックピット</strong> が AI に渡った。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="brand">
+      <span>Lecture 01</span>
+      <span>Chapter 3 · 4 年史</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Slide 5 — 立ち位置の変化
+       ============================================================ -->
+  <section data-label="立ち位置の変化 — 「PC を操作する人」から「指示する人」へ">
+    <div class="meta-line">
+      <span><span class="accent">Chapter 4</span> · 立ち位置の変化</span>
+      <span>06 / 10</span>
+    </div>
+
+    <div class="content">
+      <div class="content-eyebrow">この 4 年の結果として — 人間の役割が、初めて変わる</div>
+      <h2 class="content-title">「PC を操作する人」から「指示する人」へ</h2>
+      <p class="content-subtitle">
+        書く・調べる・整理する — PC 上のすべての行為で、立ち位置が動く
+      </p>
+      <hr class="rule">
+
+      <div class="cols-2">
+        <div>
+          <div class="col-label">これまで（〜2024）</div>
+          <div class="col-body">
+            <p>人間が <strong>PC を操作する</strong>。AI は会話相手。</p>
+            <p>キーボード・マウス・ファイル管理は、すべて <strong>人間の手元</strong>。</p>
+            <p>主役の道具は <em>エディタ・Excel・ブラウザ</em>。</p>
+          </div>
+        </div>
+
+        <div>
+          <div class="col-label">これから（2024〜）</div>
+          <div class="col-body">
+            <p>人間は <strong>意図を伝える</strong>。AI が PC を動かす。</p>
+            <p>例えば — <strong>情報収集、パワポ作成、Web アプリ操作</strong> まで AI が「<em>勝手に</em>」やる。</p>
+            <p>主役の道具は <em>ターミナル</em>（AI のコックピット）。</p>
+          </div>
+        </div>
+      </div>
+
+      <p class="aside">
+        ※ 自分で操作できる人の価値が消えるのではなく、<strong>AI に上手に指示できる人</strong>の価値が新しく生まれた、という話。
+      </p>
+    </div>
+
+    <div class="brand">
+      <span>Lecture 01</span>
+      <span>Chapter 4 · 立ち位置の変化</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Slide 7 — 何ができるか（4 象限）
+       ============================================================ -->
+  <section data-label="何ができるか — 4 つの実例">
+    <div class="meta-line">
+      <span><span class="accent">Chapter 5</span> · 何ができるか</span>
+      <span>07 / 10</span>
+    </div>
+
+    <div class="content">
+      <div class="content-eyebrow">理屈はわかった、では具体的に何が頼めるか</div>
+      <h2 class="content-title">PC に、何が頼めるのか</h2>
+      <p class="content-subtitle">
+        ターミナルに 1 行頼むと、PC が代わりに動いてくれる
+      </p>
+      <hr class="rule">
+
+      <div class="quad">
+        <div class="quad-cell">
+          <img src="_assets/persona-tl.png" alt="学生がノートPCでレポート作成" class="quad-img">
+          <div class="col-label">学生 / レポート</div>
+          <p class="quad-quote">PDF を 30 本読んで、引用したい段落を Markdown に集約して</p>
+          <p class="quad-note">参考文献の整形も、出典 URL の付与もまとめて。</p>
+        </div>
+        <div class="quad-cell">
+          <img src="_assets/persona-tr.png" alt="会社員が Excel を整理" class="quad-img">
+          <div class="col-label">事務 / Excel</div>
+          <p class="quad-quote">このフォルダの Excel 全部見て、月別のシートに整理して</p>
+          <p class="quad-note">手動で 1 日かかる作業が、対話 5 分で片付く。</p>
+        </div>
+        <div class="quad-cell">
+          <img src="_assets/persona-bl.png" alt="研究者がデータを分析" class="quad-img">
+          <div class="col-label">研究 / データ分析</div>
+          <p class="quad-quote">実験 CSV を 30 ファイル読んで、月別の傾向グラフにまとめて</p>
+          <p class="quad-note">スクリプトを書く必要はない。意図を伝えるだけ。</p>
+        </div>
+        <div class="quad-cell">
+          <img src="_assets/persona-br.png" alt="エンジニアが GitHub の Issue/PR を確認" class="quad-img">
+          <div class="col-label">エンジニア / Issue → PR</div>
+          <p class="quad-quote">Issue #42 を読んで、ブランチ切って、PR まで作って</p>
+          <p class="quad-note">ロードマップ消化が、人間の 3〜5 倍速になる。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="brand">
+      <span>Lecture 01</span>
+      <span>Chapter 5 · 実例</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Slide 8 — 実績① 数字
+       ============================================================ -->
+  <section data-label="実績 — 普及している、本当に">
+    <div class="meta-line">
+      <span><span class="accent">Chapter 6</span> · 実績</span>
+      <span>08 / 10</span>
+    </div>
+
+    <div class="content">
+      <div class="content-eyebrow">本当に普及している？ — 数字と顧客で見る</div>
+      <h2 class="content-title">普及している、本当に</h2>
+      <p class="content-subtitle">
+        AI スタートアップとして、前例のない成長スピード
+      </p>
+      <hr class="rule">
+
+      <div class="stats-grid" style="grid-template-columns: repeat(3, 1fr);">
+        <div class="stat">
+          <div class="stat-num">$30B</div>
+          <div class="stat-label">年率換算売上 (ARR)</div>
+          <div class="stat-note">2026/4 時点。OpenAI ($25B) を抜いた。</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">$380B</div>
+          <div class="stat-label">企業評価額</div>
+          <div class="stat-note">Series G (2026/2)。$800〜900B の追加打診あり。</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">70<span class="stat-unit">%</span></div>
+          <div class="stat-label">Fortune 100 が採用</div>
+          <div class="stat-note">大企業の主流が Claude を選び始めた。</div>
+        </div>
+      </div>
+
+      <!-- ARR 推移バーチャート -->
+      <svg viewBox="0 0 1700 130" style="width: 100%; max-width: 1500px; margin-top: 28px;" xmlns="http://www.w3.org/2000/svg">
+        <line x1="160" y1="100" x2="1640" y2="100" stroke="#d6d0c0" stroke-width="1"/>
+        <rect x="160" y="80" width="49" height="20" fill="#cc785c" opacity="0.45"/>
+        <text x="160" y="125" font-family="Inter, sans-serif" font-size="14" fill="#6c6c6c">2024/12</text>
+        <text x="215" y="74" font-family="Source Serif 4, serif" font-size="18" fill="#1f1f1f" font-weight="500">$1B</text>
+        <rect x="160" y="80" width="691" height="20" fill="#cc785c" opacity="0.7"/>
+        <text x="780" y="125" font-family="Inter, sans-serif" font-size="14" fill="#6c6c6c">2026/2</text>
+        <text x="855" y="74" font-family="Source Serif 4, serif" font-size="18" fill="#1f1f1f" font-weight="500">$14B</text>
+        <rect x="160" y="80" width="1480" height="20" fill="#cc785c"/>
+        <text x="1610" y="125" font-family="Inter, sans-serif" font-size="14" fill="#6c6c6c" text-anchor="end">2026/4</text>
+        <text x="1635" y="74" font-family="Source Serif 4, serif" font-size="22" fill="#cc785c" font-weight="600" text-anchor="end">$30B</text>
+        <text x="0" y="93" font-family="Inter, sans-serif" font-size="13" fill="#a39f93" letter-spacing="0.1em">ARR 推移</text>
+        <text x="0" y="115" font-family="Inter, sans-serif" font-size="13" fill="#a39f93">(14 ヶ月で 14 倍)</text>
+      </svg>
+
+      <p class="aside" style="margin-top: 16px;">
+        ※ <strong>大企業もデプロイ</strong>：Deloitte 47 万人、Cognizant 35 万人、Salesforce が Slack の AI を Claude に。出所は Anthropic 公式・Bloomberg・SaaStr（2026/4 時点）。
+      </p>
+    </div>
+
+    <div class="brand">
+      <span>Lecture 01</span>
+      <span>Chapter 6 · 実績</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Slide 9 — 結論：なぜ今か
+       ============================================================ -->
+  <section data-label="結論 — 数年後、これが標準になる">
+    <div class="meta-line">
+      <span><span class="accent">Chapter 7</span> · なぜ今か</span>
+      <span>09 / 10</span>
+    </div>
+
+    <div class="content">
+      <div class="content-eyebrow">ここまでをまとめると — 第 1 回の主張</div>
+      <h2 class="content-title">数年後、これが「標準」になる</h2>
+      <p class="content-subtitle">
+        先に学んだ人が、長く強い
+      </p>
+      <hr class="rule">
+
+      <div style="margin-top: 16px;">
+        <span class="pullquote-mark">&ldquo;</span>
+        <p class="pullquote">
+          自分で PC を動かす人ではなく、<br>
+          <em>PC に動いてもらえる人</em>が、新しく強くなる。
+        </p>
+      </div>
+
+      <p class="aside" style="margin-top: 56px;">
+        歴史を振り返ると、検索エンジン・スマートフォン・GitHub — どれも <strong>最初に握った人が、長く有利</strong> だった。Claude Code は、次のその波。
+      </p>
+    </div>
+
+    <div class="brand">
+      <span>Lecture 01</span>
+      <span>Chapter 7 · なぜ今か</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Slide 10 — 終わりに
+       ============================================================ -->
+  <section data-label="終わりに — 次回までに考えてほしい問い">
+    <div class="meta-line">
+      <span><span class="accent">Coda</span> · 次回までに</span>
+      <span>10 / 10</span>
+    </div>
+
+    <div class="content">
+      <div class="content-eyebrow">第 1 回はここまで</div>
+      <h2 class="content-title">一つだけ、問いを残します</h2>
+      <p class="content-subtitle">
+        テクノロジーが、手段を増やしてくれた
+      </p>
+      <hr class="rule">
+
+      <div style="margin-top: 8px;">
+        <span class="pullquote-mark" style="font-size: 88px; margin-bottom: 12px;">&ldquo;</span>
+        <p class="pullquote" style="font-size: 50px; line-height: 1.35;">
+          ひとりで、何でもできるようになった。<br>
+          だからこそ、これからは <em>「手段よりも目的」</em> が、問われる。
+        </p>
+        <p style="font-family: var(--font-serif); font-size: 26px; color: var(--ink-mute); margin: 16px 0 0 0; font-style: italic; letter-spacing: 0.02em;">
+          ── あなたは、何のために、何を、作ってみたいですか。
+        </p>
+      </div>
+
+      <div class="resources" style="margin-top: 20px;">
+        <div class="res-label">もう一歩、学びたい人へ — 参考になる 3 チャンネル</div>
+        <div class="res-grid">
+          <div class="res-cell">
+            <div class="res-channel">安野貴博の自由研究（29 万）</div>
+            <a class="res-video" href="https://www.youtube.com/watch?v=frTURfI-WlU">バイブコーディング超入門 第 1 回</a>
+            <div class="res-meta">18 分 · 動機の補強</div>
+          </div>
+          <div class="res-cell">
+            <div class="res-channel">AIでサボろうチャンネル（6.9 万）</div>
+            <a class="res-video" href="https://www.youtube.com/watch?v=EwS4MUIYJjM">非エンジニア向け・最初の一歩</a>
+            <div class="res-meta">17 分 · ツール選び</div>
+          </div>
+          <div class="res-cell">
+            <div class="res-channel">にゃんたのAIチャンネル（5.5 万）</div>
+            <a class="res-video" href="https://www.youtube.com/watch?v=_OiMAiaG1js">Claude Code 完全入門【2026 年最新版】</a>
+            <div class="res-meta">55 分 · 機能網羅</div>
+          </div>
+        </div>
+      </div>
+
+      <p class="aside" style="margin-top: 28px;">
+        ※ 次回は環境構築から。事前準備は不要。気が向けば <a href="https://www.anthropic.com/" style="color: var(--clay-deep); text-decoration: underline;">anthropic.com</a> でアカウントだけ作っておくと、立ち上がりが速いです。
+      </p>
+    </div>
+
+    <div class="brand">
+      <span>渡邊康平 / 高知工科大学</span>
+      <span>Lecture 01 · End</span>
+    </div>
+  </section>
+
+</deck-stage>
+
+<!--
+  ============================================================
+  Speaker notes (optional, for in-person delivery)
+  ============================================================
+-->
+<script type="application/json" id="speaker-notes">
+{
+  "0": "表紙。第 1 回は『Claude Code 入門』。コーディング寄りの話は省き、純粋に Claude Code の正体と意義に絞る。",
+  "1": "読み方の宣言。HTML だから AI も読めて編集もできる。資料は『概要のみ』、詳細は受講者の AI に聞いてもらう前提。",
+  "2": "用語の整理。Claude（モデル）/ claude.ai（Web アプリ）/ Claude Code（CLI）は別物。OpenAI も同様（GPT / ChatGPT / Codex CLI）。中身は同じでもラッピング次第。",
+  "3": "Claude Code とは（チャットボットじゃない、AI 社員）。ChatGPT/Claude (web) は会話するだけ、Claude Code は PC のターミナルで動いて手を動かす。馬・ハーネスの比喩で技術的裏付け。",
+  "4": "AI コーディング 4 年史を 1 枚に圧縮。ChatGPT (PCの外) → Copilot/Cursor (エディタ・コーディング特化) → Claude Code (PC全体・汎用)。",
+  "5": "立ち位置の変化。PC を操作する人 → 指示する人。情報収集・パワポ・Web操作まで AI が勝手にやる時代。",
+  "6": "実例 4 つ：学生レポート / 事務 Excel / 研究データ分析 / エンジニア Issue→PR。'これ自分にも頼めるんだ' と感じる多様なシーン。",
+  "7": "実績。ARR $30B（OpenAI 抜き）、評価額 $380B、Fortune 100 の 70% が採用。大企業も Deloitte 47 万人デプロイなど本格採用。",
+  "8": "結論。検索エンジン・スマホ・GitHub — 最初に握った人が長く有利だった。Claude Code はその次の波。",
+  "9": "終わりに。哲学的着地：手段は揃った → ひとりで何でもできる → だからこそ目的が問われる。問いを残し、推薦動画 3 本を提示。"
+}
+</script>
+
+</body>
+</html>
