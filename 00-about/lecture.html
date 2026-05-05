@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>Read me — 1 年で陳腐化する世界の、資料の作り方</title>
+
+<!--
+  ============================================================
+  Read me — Lectures シリーズの取説
+  「1 年で陳腐化する世界で、資料はどう作るべきか」 ── その試作
+
+  本体の運用方針はこちら、各回の応用例は ../01-claude-code-intro/ 以降。
+  同内容のテキスト版は ../CLAUDE.md。
+
+  Author : 渡邊康平 (ko-dhinngumuzuiyoo)
+  Repo   : https://github.com/ko-dhinngumuzuiyoo/lectures
+  ============================================================
+-->
+
+<link rel="stylesheet" href="../shared/theme.css">
+<script src="../shared/deck-stage.js"></script>
+<script src="../shared/progress-strip.js" defer></script>
+</head>
+<body>
+
+<deck-stage width="1920" height="1080">
+
+  <!-- ============================================================
+       Slide 1 — Cover
+       ============================================================ -->
+  <section data-label="Cover — 1 年で陳腐化する世界の、資料の作り方">
+    <div class="cover">
+      <div class="cover-eyebrow">Read me · この資料そのものについて</div>
+      <h1 class="cover-title">
+        1 年で<br>
+        陳腐化する世界の、<br>
+        資料の作り方
+      </h1>
+      <p class="cover-subtitle">
+        HTML × Git × AI を選んだ、3 つの具体的な理由。
+      </p>
+    </div>
+
+    <div class="brand">
+      <span>渡邊康平 / 高知工科大学</span>
+      <span>2026</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Slide 2 — 課題：今までのやり方では追いつけない
+       ============================================================ -->
+  <section data-label="課題 — 今までのやり方では追いつけない">
+    <div class="meta-line">
+      <span><span class="accent">Chapter 1</span> · 課題</span>
+      <span>02 / 07</span>
+    </div>
+
+    <div class="content">
+      <div class="content-eyebrow">なぜこの形にしたのか — まず課題から</div>
+      <h2 class="content-title">今までのやり方では、追いつけない</h2>
+      <p class="content-subtitle">
+        変化のスピードに、PPTx は構造的に合わない
+      </p>
+      <hr class="rule">
+
+      <div class="cols-2">
+        <div>
+          <div class="col-label">変化のスピード</div>
+          <div class="col-body">
+            <p>AI 周辺は <strong>半年〜1 年</strong> で道具・ノウハウ・ベストプラクティスが入れ替わる。</p>
+            <p>主役だった ChatGPT が、Cursor に、そして Claude Code に。<em>ベンチマークも、書籍の内容も、すぐ古くなる</em>。</p>
+          </div>
+        </div>
+
+        <div>
+          <div class="col-label">PPTx の前提</div>
+          <div class="col-body">
+            <p>1 回作って、配布して、終わり。<strong>古くなったら作り直し</strong>。</p>
+            <p>履歴は残らない、編集は重い、AI は読めない、誰も直さない。<em>変わり続ける世界には合わない</em>。</p>
+          </div>
+        </div>
+      </div>
+
+      <p class="aside">
+        ※ 配布した瞬間に古くなる資料を、毎回作り直すのか？ <strong>媒体そのものから見直す必要がある</strong>。
+      </p>
+    </div>
+
+    <div class="brand">
+      <span>Read me</span>
+      <span>Chapter 1 · 課題</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Slide 3 — 具体例：内容も、学び方も、1 年で別物
+       ============================================================ -->
+  <section data-label="具体例 — 内容も学び方も 1 年で別物">
+    <div class="meta-line">
+      <span><span class="accent">Chapter 1</span> · 続 · 具体例</span>
+      <span>03 / 07</span>
+    </div>
+
+    <div class="content">
+      <div class="content-eyebrow">どれくらい、変わるのか</div>
+      <h2 class="content-title">内容も、学び方も、1 年で別物</h2>
+      <p class="content-subtitle">
+        <strong>過去 → 今・未来</strong>（横軸）と <strong>内容 ／ 学び方</strong>（縦軸）の 2 軸で見る
+      </p>
+      <hr class="rule">
+
+      <!-- 横軸：時間 → -->
+      <div style="display: grid; grid-template-columns: 220px 1fr 1fr; align-items: end; padding: 0 0 6px 0; margin-top: 6px;">
+        <div></div>
+        <div style="grid-column: 2 / span 2; padding: 0 16px;">
+          <div style="font-family: var(--font-sans); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--clay); font-weight: 600; margin-bottom: 4px;">横軸 ── 時間の流れ</div>
+          <svg viewBox="0 0 1000 14" style="width: 100%; height: 14px; display: block;" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <line x1="2" y1="7" x2="980" y2="7" stroke="#cc785c" stroke-width="2"/>
+            <polygon points="978,1 1000,7 978,13" fill="#cc785c"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- 縦軸 (左) + マトリクス (右) -->
+      <div style="display: grid; grid-template-columns: 56px 1fr; gap: 12px; align-items: stretch;">
+        <!-- 縦軸：何が ↓ -->
+        <div style="display: flex; flex-direction: column; align-items: center; padding: 16px 0;">
+          <div style="font-family: var(--font-sans); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--clay); font-weight: 600; writing-mode: vertical-rl; margin-bottom: 8px;">縦軸 ── 何が</div>
+          <svg viewBox="0 0 14 200" style="width: 14px; flex: 1; display: block;" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <line x1="7" y1="2" x2="7" y2="190" stroke="#cc785c" stroke-width="2"/>
+            <polygon points="1,188 13,188 7,200" fill="#cc785c"/>
+          </svg>
+        </div>
+
+        <div class="matrix matrix-2">
+          <div class="m-cell m-corner"></div>
+          <div class="m-cell m-head">過去（〜2024）</div>
+          <div class="m-cell m-head m-hi">今・未来（2024〜）</div>
+
+          <div class="m-cell m-row">内容<br><span class="m-row-sub">何を扱うか</span></div>
+          <div class="m-cell">
+            <p style="margin: 0 0 10px 0;"><strong>「魔法の構文」のプロンプト本</strong>。Few-shot, CoT, システムプロンプト設計…</p>
+            <p style="margin: 0;"><strong>ChatGPT + Cursor</strong> が最先端ツール。</p>
+          </div>
+          <div class="m-cell m-hi">
+            <p style="margin: 0 0 10px 0;"><strong>プロンプト不要</strong>。Claude Code が勝手に think。</p>
+            <p style="margin: 0;"><strong>Claude Code · MCP · worktree</strong> が標準。<em>半年単位で主役が入れ替わる</em>。</p>
+          </div>
+
+          <div class="m-cell m-row">学び方<br><span class="m-row-sub">どう身につけるか</span></div>
+          <div class="m-cell">
+            <p style="margin: 0 0 10px 0;"><strong>著者がまとめた "正解"</strong> を本やコースで学ぶ。</p>
+            <p style="margin: 0;">印刷された頃には<em>もう古い</em>。紙の媒体では追いつけない。</p>
+          </div>
+          <div class="m-cell m-hi">
+            <p style="margin: 0 0 10px 0;"><strong>Claude Code を伴走者</strong>にする。隣に置いて、その場で深掘り。</p>
+            <p style="margin: 0;"><em>教科書を読む</em> から <strong>AI と対話する</strong> へ。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="brand">
+      <span>Read me</span>
+      <span>Chapter 1 · 具体例</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Slide 4 — 解決策 01：PPTx ではなく HTML
+       ============================================================ -->
+  <section data-label="解決策 01 — PPTx ではなく HTML">
+    <div class="meta-line">
+      <span><span class="accent">Chapter 2</span> · 解決策 01</span>
+      <span>04 / 07</span>
+    </div>
+
+    <div class="content">
+      <div class="content-eyebrow">3 つの解決策 — その 1</div>
+      <div class="solution-header">
+        <div class="solution-num">01</div>
+        <div>
+          <h2 class="content-title" style="margin: 0 0 16px 0;">PPTx ではなく、HTML</h2>
+          <p class="content-subtitle" style="margin: 0;">
+            AI が直接読めて、編集もできて、Git で履歴が残る
+          </p>
+        </div>
+      </div>
+      <hr class="rule">
+
+      <ul class="dashed">
+        <li>
+          <strong>AI が構造を理解できる。</strong>
+          PPTx はバイナリ。HTML は構造化テキストなので、Claude Code が <em>そのまま読み・編集できる</em>。
+        </li>
+        <li>
+          <strong>Git の差分が取れる。</strong>
+          誰が・いつ・なぜ変えたかが一行単位で追える。バイナリの PPTx では不可能。
+        </li>
+        <li>
+          <strong>生成・編集が圧倒的に速い。</strong>
+          PowerPoint を立ち上げる必要なし。トークン消費も大幅に少なく、コストが安い。
+        </li>
+      </ul>
+
+      <p class="aside">
+        ※ HTML は "プログラミング言語" ではないが、機械可読 = AI フレンドリー。Web エコシステム（ブラウザ・Git・CDN）がそのまま使える。
+      </p>
+    </div>
+
+    <div class="brand">
+      <span>Read me</span>
+      <span>解決策 01 · HTML</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Slide 5 — 解決策 02：詰め込まず、枚数も増やさない
+       ============================================================ -->
+  <section data-label="解決策 02 — 詰め込まず、枚数も増やさない">
+    <div class="meta-line">
+      <span><span class="accent">Chapter 2</span> · 解決策 02</span>
+      <span>05 / 07</span>
+    </div>
+
+    <div class="content">
+      <div class="content-eyebrow">3 つの解決策 — その 2</div>
+      <div class="solution-header">
+        <div class="solution-num">02</div>
+        <div>
+          <h2 class="content-title" style="margin: 0 0 16px 0;">詰め込まず、枚数も増やさない</h2>
+          <p class="content-subtitle" style="margin: 0;">
+            詳細は読者の AI（Claude Code）に深掘りしてもらう前提
+          </p>
+        </div>
+      </div>
+      <hr class="rule">
+
+      <ul class="dashed">
+        <li>
+          <strong>スライドは骨格と主張のみ。</strong>
+          詳細を抱え込まない。<em>「ここから先は AI に聞いてください」</em> と言える形を最初から想定する。
+        </li>
+        <li>
+          <strong>読者が AI に質問する練習になる。</strong>
+          スライドを読み切るのではなく、<strong>隣に Claude Code を置いて深掘り</strong>。それ自体が学びの一部。
+        </li>
+        <li>
+          <strong>陳腐化に強い。</strong>
+          細かい数値や設定値は変わるが、骨格と主張は長く使える。<em>抽象度の高い情報だけが残る</em>。
+        </li>
+      </ul>
+
+      <p class="aside">
+        ※ 1 枚 1 メッセージ・全体で 25 分以内・文字は最小限。<strong>枚数を増やさない</strong>のが原則。
+      </p>
+    </div>
+
+    <div class="brand">
+      <span>Read me</span>
+      <span>解決策 02 · ミニマル</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Slide 6 — 解決策 03：Git/GitHub で継続更新
+       ============================================================ -->
+  <section data-label="解決策 03 — Git/GitHub で継続更新">
+    <div class="meta-line">
+      <span><span class="accent">Chapter 2</span> · 解決策 03</span>
+      <span>06 / 07</span>
+    </div>
+
+    <div class="content">
+      <div class="content-eyebrow">3 つの解決策 — その 3</div>
+      <div class="solution-header">
+        <div class="solution-num">03</div>
+        <div>
+          <h2 class="content-title" style="margin: 0 0 16px 0;">1 回作って、終わりにしない</h2>
+          <p class="content-subtitle" style="margin: 0;">
+            Git/GitHub で、誰でも・いつでも更新できる
+          </p>
+        </div>
+      </div>
+      <hr class="rule">
+
+      <ul class="dashed">
+        <li>
+          <strong>GitHub エコシステムを、そのまま使う。</strong>
+          履歴・差分・<code>Issue</code>・<code>Pull Request</code>・<code>Discussions</code> — 世界中で確立された <em>共同編集の道具一式</em> が、自分の資料にそのまま乗る。新しいツールを覚える必要はない。
+        </li>
+        <li>
+          <strong>PR を書けないなら、Issue だけでいい。</strong>
+          「ここがわからなかった」「こうしてほしい」を <strong>一行</strong> 書くだけで参加できる。<em>プロでなくていい</em>。むしろ、最初に読んだ人の素直な声こそ資料を良くする。
+        </li>
+        <li>
+          <strong>セッション JSON も資産。</strong>
+          Claude Code 等のセッションログを保存すれば、<strong>「どんな対話で良い修正が生まれたか」</strong> を後から分析できる。
+        </li>
+      </ul>
+
+      <!-- アーキテクチャ図 (SVG) — 3 つの解決策がどう組み合わさるか -->
+      <svg viewBox="0 0 1700 130" style="width: 100%; max-width: 1500px; margin-top: 24px;" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="arr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="#cc785c"/>
+          </marker>
+        </defs>
+        <rect x="700" y="40" width="300" height="60" rx="6" fill="#f3e3dc" stroke="#cc785c" stroke-width="2"/>
+        <text x="850" y="68" text-anchor="middle" font-family="Source Serif 4, serif" font-size="22" font-weight="500" fill="#1f1f1f">HTML</text>
+        <text x="850" y="90" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" fill="#6c6c6c">資料の本体</text>
+        <rect x="60" y="30" width="280" height="80" rx="6" fill="#f7f5ed" stroke="#d6d0c0" stroke-width="1"/>
+        <text x="200" y="60" text-anchor="middle" font-family="Source Serif 4, serif" font-size="20" font-weight="500" fill="#1f1f1f">AI</text>
+        <text x="200" y="82" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" fill="#6c6c6c">読む・書く・編集</text>
+        <text x="200" y="100" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#a39f93">02 ミニマル前提</text>
+        <rect x="1360" y="30" width="280" height="80" rx="6" fill="#f7f5ed" stroke="#d6d0c0" stroke-width="1"/>
+        <text x="1500" y="60" text-anchor="middle" font-family="Source Serif 4, serif" font-size="20" font-weight="500" fill="#1f1f1f">Git</text>
+        <text x="1500" y="82" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" fill="#6c6c6c">履歴を残す・PR で育てる</text>
+        <text x="1500" y="100" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" fill="#a39f93">03 継続更新</text>
+        <line x1="340" y1="70" x2="700" y2="70" stroke="#cc785c" stroke-width="1.5" marker-start="url(#arr2)" marker-end="url(#arr2)"/>
+        <line x1="1000" y1="70" x2="1360" y2="70" stroke="#cc785c" stroke-width="1.5" marker-start="url(#arr2)" marker-end="url(#arr2)"/>
+        <text x="850" y="20" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" letter-spacing="0.16em" fill="#cc785c" font-weight="600">01 HTML を選ぶ</text>
+      </svg>
+    </div>
+
+    <div class="brand">
+      <span>Read me</span>
+      <span>解決策 03 · Git</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Slide 7 — あなたへ
+       ============================================================ -->
+  <section data-label="あなたへ — 育つ資料に参加する">
+    <div class="meta-line">
+      <span><span class="accent">Coda</span> · 招待</span>
+      <span>07 / 07</span>
+    </div>
+
+    <div class="content">
+      <div class="content-eyebrow">この資料の使い方</div>
+      <h2 class="content-title">古くなったら、あなたが直せる</h2>
+      <p class="content-subtitle">
+        この資料は完成品ではない。育てるための土台
+      </p>
+      <hr class="rule">
+
+      <ul class="dashed" style="font-size: 26px;">
+        <li style="font-size: 26px; margin-bottom: 20px; line-height: 1.55;">
+          <strong>読み手として：</strong>
+          隣に AI（Claude Code / Codex）を置いて読む。気になるところはその場で深掘り。
+        </li>
+        <li style="font-size: 26px; margin-bottom: 20px; line-height: 1.55;">
+          <strong>意見したくなったら、Issue を立てる。</strong>
+          「ここがわからなかった」「こうしてほしい」「この情報は古い」 — 一行で <code>Issue</code> を立てるだけで参加できる。<strong>プロでなくていい</strong>。<em>素直な疑問こそ、資料を育てる</em>。
+        </li>
+        <li style="font-size: 26px; margin-bottom: 20px; line-height: 1.55;">
+          <strong>本格的に直したいなら、PR：</strong>
+          GitHub から <code>fork</code> して、AI に頼んで HTML を直す。<strong>PR で送り返す</strong>。マージされたら、あなたの修正がこの資料に乗る。
+        </li>
+        <li style="font-size: 26px; margin-bottom: 20px; line-height: 1.55;">
+          <strong>セッションも残せる：</strong>
+          Claude Code のセッション JSON を repository に保存すると、後から「どんな対話で良い修正が生まれたか」を学べる。
+        </li>
+      </ul>
+
+      <p class="aside" style="margin-top: 24px;">
+        ※ <strong>Issue → 読む → 直す → PR → merge</strong> — このサイクルで資料は育っていく。詳細は <code>../CLAUDE.md</code>。
+      </p>
+    </div>
+
+    <div class="brand">
+      <span>渡邊康平 / 高知工科大学</span>
+      <span>Read me · End</span>
+    </div>
+  </section>
+
+</deck-stage>
+
+<!--
+  ============================================================
+  Speaker notes (optional)
+  ============================================================
+-->
+<script type="application/json" id="speaker-notes">
+{
+  "0": "表紙。'1 年で陳腐化する世界の資料の作り方' という具体的な問題提起から始める。HTML × Git × AI を選んだ、3 つの具体的理由を以後 6 枚で説明。",
+  "1": "課題：今までのやり方では追いつけない。AI 周辺は半年〜1 年で別物になるのに、PPTx は 1 回作って終わりの前提。媒体そのものから見直す必要があると問題提起。",
+  "2": "具体例 4 つ。プロンプトエンジニアリング (内容)、AI 開発ツール (内容)、書籍・教科書 (旧学び方)、Claude Code と一緒に学ぶ (新学び方)。内容だけでなく学び方も変わったことを強調。",
+  "3": "解決策 01：HTML を選ぶ。AI が読める・Git で履歴が残る・編集が速い。",
+  "4": "解決策 02：詰め込まず、枚数も増やさない。詳細は読者の AI に深掘りしてもらう前提。読者が AI に質問する練習にもなる。",
+  "5": "解決策 03：Git/GitHub の既存エコシステム（履歴・差分・Issue・PR・Discussions）を丸ごと活用。PR を書けない人も Issue だけで参加できる、プロでなくてもいいことを強調。3 つの解決策が AI ↔ HTML ↔ Git の連携で動くことを SVG で示す。",
+  "6": "あなたへ。読む → Issue で意見 → PR で修正 → セッション保存、の 4 段階で参加できる。Issue は一行で OK、プロでなくていい、と強く誘う。読む → 気づく → 直す → PR → 育つ のフローで締める。"
+}
+</script>
+
+</body>
+</html>

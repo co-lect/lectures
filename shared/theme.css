@@ -1,0 +1,830 @@
+/* ===========================================================
+ * shared/theme.css
+ * Anthropic-inspired design system for the Lecture Series
+ *
+ * 設計原則:
+ *  - 白基調ではなくクリーム（暖色オフホワイト）
+ *  - テラコッタを唯一のアクセント、量は最小
+ *  - Serif（Source Serif 4 / Noto Serif JP）が見出しの主役
+ *  - 余白は贅沢に。1 スライド 1 メッセージ
+ *  - 装飾的な枠線・影は使わない
+ * =========================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=Inter:wght@400;500;600;700&family=Noto+Serif+JP:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  /* ── Surfaces ─────────────────────────────────────── */
+  --cream:        #f0eee5;   /* Anthropic 風の暖かいオフホワイト */
+  --cream-soft:   #f7f5ed;
+  --paper:        #ffffff;
+
+  /* ── Ink ─────────────────────────────────────────── */
+  --ink:          #1f1f1f;
+  --ink-2:        #3d3d3d;
+  --ink-mute:     #6c6c6c;
+  --ink-light:    #a39f93;
+
+  /* ── Accent (terracotta / clay) ──────────────────── */
+  --clay:         #cc785c;
+  --clay-deep:    #a85a3f;
+  --clay-soft:    #f3e3dc;
+  --clay-haze:    #faf2ee;
+
+  /* ── Lines ───────────────────────────────────────── */
+  --rule:         #e6e0d2;
+  --border:       #d6d0c0;
+
+  /* ── Typography ──────────────────────────────────── */
+  --font-serif:   "Source Serif 4", "Noto Serif JP", "Yu Mincho", "Hiragino Mincho ProN", serif;
+  --font-sans:    "Inter", "Noto Sans JP", -apple-system, "Yu Gothic", "Hiragino Kaku Gothic ProN", sans-serif;
+  --font-mono:    "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
+}
+
+/* ===== Page ===== */
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--cream);
+}
+
+/* ===== deck-stage host ===== */
+deck-stage {
+  font-family: var(--font-sans);
+  color: var(--ink);
+  font-feature-settings: "palt" 1;  /* 日本語の自動カーニング */
+}
+
+deck-stage > section {
+  background: var(--cream);
+  color: var(--ink);
+  overflow: hidden;
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* ============================================================
+ * Meta line (top-left: series, top-right: chapter & page)
+ * ============================================================ */
+.meta-line {
+  position: absolute;
+  top: 64px; left: 112px; right: 112px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: var(--font-sans);
+  font-size: 18px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  font-weight: 500;
+}
+.meta-line .accent { color: var(--clay); font-weight: 600; }
+
+/* footer brand */
+.brand {
+  position: absolute;
+  bottom: 56px; left: 112px; right: 112px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: var(--font-sans);
+  font-size: 18px;
+  color: var(--ink-light);
+  letter-spacing: 0.06em;
+}
+
+/* ============================================================
+ * Cover slide
+ * ============================================================ */
+.cover {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 160px;
+}
+.cover-eyebrow {
+  font-family: var(--font-sans);
+  font-size: 22px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--clay);
+  font-weight: 600;
+  margin-bottom: 56px;
+}
+.cover-title {
+  font-family: var(--font-serif);
+  font-size: 116px;
+  line-height: 1.04;
+  letter-spacing: -0.018em;
+  color: var(--ink);
+  font-weight: 500;
+  margin: 0 0 40px 0;
+  max-width: 1520px;
+}
+.cover-subtitle {
+  font-family: var(--font-serif);
+  font-size: 36px;
+  line-height: 1.4;
+  color: var(--ink-mute);
+  font-weight: 400;
+  font-style: italic;
+  max-width: 1300px;
+  margin: 0;
+}
+
+/* ============================================================
+ * Standard content slide
+ * ============================================================ */
+.content {
+  position: absolute;
+  inset: 176px 112px 128px 112px;
+}
+.content-eyebrow {
+  font-family: var(--font-sans);
+  font-size: 20px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--clay);
+  font-weight: 600;
+  margin-bottom: 28px;
+}
+.content-title {
+  font-family: var(--font-serif);
+  font-size: 76px;
+  line-height: 1.13;
+  color: var(--ink);
+  font-weight: 500;
+  letter-spacing: -0.012em;
+  margin: 0 0 28px 0;
+  max-width: 1520px;
+}
+.content-subtitle {
+  font-family: var(--font-serif);
+  font-size: 32px;
+  line-height: 1.45;
+  color: var(--ink-mute);
+  font-style: italic;
+  font-weight: 400;
+  margin: 0 0 56px 0;
+  max-width: 1400px;
+}
+
+.rule {
+  width: 64px;
+  height: 3px;
+  background: var(--clay);
+  margin: 0 0 48px 0;
+  border: 0;
+}
+
+/* ============================================================
+ * Body prose
+ * ============================================================ */
+.prose {
+  font-family: var(--font-sans);
+  font-size: 30px;
+  line-height: 1.62;
+  color: var(--ink-2);
+  font-weight: 400;
+  max-width: 1500px;
+}
+.prose p { margin: 0 0 24px 0; }
+.prose strong, .prose b { color: var(--ink); font-weight: 600; }
+.prose em { color: var(--clay-deep); font-style: italic; }
+
+/* ============================================================
+ * Quiet list (dashed)
+ * ============================================================ */
+ul.dashed {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+ul.dashed > li {
+  position: relative;
+  padding-left: 40px;
+  margin-bottom: 32px;
+  font-size: 30px;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+ul.dashed > li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 24px;
+  width: 22px; height: 1px;
+  background: var(--clay);
+}
+ul.dashed > li strong { color: var(--ink); font-weight: 600; }
+
+/* ============================================================
+ * Two-column layout
+ * ============================================================ */
+.cols-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+}
+.cols-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 64px;
+}
+.col-label {
+  font-family: var(--font-sans);
+  font-size: 18px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--clay);
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+.col-body {
+  font-family: var(--font-sans);
+  font-size: 26px;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+.col-body strong { color: var(--ink); font-weight: 600; }
+
+/* ============================================================
+ * Pull quote (large italic serif, with leading curly quote)
+ * ============================================================ */
+.pullquote {
+  font-family: var(--font-serif);
+  font-size: 64px;
+  line-height: 1.3;
+  color: var(--ink);
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: -0.008em;
+  max-width: 1500px;
+  margin: 0;
+}
+.pullquote-mark {
+  font-family: var(--font-serif);
+  font-size: 120px;
+  color: var(--clay);
+  line-height: 0.5;
+  display: block;
+  margin-bottom: 24px;
+}
+
+/* ============================================================
+ * Timeline (year + title + body)
+ * ============================================================ */
+.timeline {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  margin-top: 24px;
+}
+.timeline > .step {
+  position: relative;
+  padding: 8px 40px 8px 32px;
+  border-left: 1px solid var(--rule);
+}
+.timeline > .step.active { border-left: 3px solid var(--clay); }
+.step-year {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 22px;
+  color: var(--clay);
+  letter-spacing: 0.04em;
+  margin-bottom: 14px;
+  font-weight: 500;
+}
+.step-title {
+  font-family: var(--font-serif);
+  font-size: 36px;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+.step-body {
+  font-family: var(--font-sans);
+  font-size: 22px;
+  line-height: 1.6;
+  color: var(--ink-mute);
+}
+
+/* ============================================================
+ * Mono / code
+ * ============================================================ */
+code, .mono {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  background: var(--clay-haze);
+  padding: 2px 10px;
+  border-radius: 3px;
+  color: var(--clay-deep);
+  font-weight: 500;
+}
+
+/* ============================================================
+ * Aside / footnote (small, muted)
+ * ============================================================ */
+.aside {
+  font-family: var(--font-sans);
+  font-size: 20px;
+  line-height: 1.55;
+  color: var(--ink-light);
+  margin-top: 32px;
+}
+.aside strong { color: var(--ink-mute); }
+
+/* ============================================================
+ * Section break / divider slide
+ * ============================================================ */
+.section-break {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 160px;
+}
+.section-number {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 32px;
+  color: var(--clay);
+  letter-spacing: 0.04em;
+  margin-bottom: 32px;
+  font-weight: 500;
+}
+.section-title {
+  font-family: var(--font-serif);
+  font-size: 96px;
+  line-height: 1.1;
+  color: var(--ink);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  margin: 0;
+  max-width: 1500px;
+}
+
+/* ============================================================
+ * Comparison matrix (e.g. Claude Code vs others)
+ * .matrix-5 = 5 data columns, .matrix-3 = 3 data columns
+ * ============================================================ */
+.matrix {
+  display: grid;
+  margin-top: 12px;
+  border-top: 1px solid var(--rule);
+  border-left: 1px solid var(--rule);
+  font-family: var(--font-sans);
+}
+.matrix-5 { grid-template-columns: 200px repeat(5, 1fr); }
+.matrix-3 { grid-template-columns: 280px repeat(3, 1fr); }
+.matrix-2 { grid-template-columns: 200px repeat(2, 1fr); }
+
+.m-cell {
+  padding: 18px 20px;
+  border-right: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  font-size: 22px;
+  line-height: 1.45;
+  color: var(--ink-2);
+  display: flex;
+  align-items: center;
+}
+.matrix-3 .m-cell {
+  padding: 22px 28px;
+  font-size: 24px;
+}
+
+.m-cell.m-corner {
+  background: transparent;
+}
+.m-cell.m-head {
+  font-family: var(--font-serif);
+  font-size: 26px;
+  font-weight: 500;
+  color: var(--ink);
+  background: var(--cream-soft);
+  letter-spacing: -0.005em;
+}
+.matrix-3 .m-cell.m-head { font-size: 30px; }
+
+.m-cell.m-row {
+  font-family: var(--font-sans);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--clay);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: var(--cream-soft);
+}
+.m-row-sub {
+  display: block;
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--ink-light);
+  text-transform: none;
+  letter-spacing: 0.02em;
+  margin-top: 4px;
+}
+
+.m-cell.m-hi {
+  background: var(--clay-haze);
+  color: var(--ink);
+}
+.m-cell.m-hi.m-head {
+  background: var(--clay-soft);
+  color: var(--clay-deep);
+}
+.m-cell.m-hi strong { color: var(--ink); font-weight: 600; }
+
+/* ============================================================
+ * Quadrant layout (2 × 2 examples)
+ * ============================================================ */
+.quad {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px 56px;
+  margin-top: 8px;
+}
+.quad-cell {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 20px;
+  align-items: start;
+}
+.quad-img {
+  width: 130px;
+  height: 130px;
+  object-fit: cover;
+  border-radius: 4px;
+  grid-row: span 4;
+}
+.quad-cell .col-label,
+.quad-cell .quad-quote,
+.quad-cell .quad-note,
+.quad-cell .quad-more {
+  grid-column: 2;
+}
+.quad-cell .quad-quote {
+  font-size: 22px;
+  line-height: 1.4;
+  margin: 4px 0 6px 0;
+}
+.quad-cell .quad-note {
+  font-size: 17px;
+}
+.quad-cell .quad-more {
+  margin: 4px 0 0 0;
+  padding: 0 0 0 18px;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+.quad-cell .quad-more li {
+  margin-bottom: 3px;
+}
+.quad-quote {
+  font-family: var(--font-serif);
+  font-size: 30px;
+  line-height: 1.4;
+  color: var(--ink);
+  font-weight: 500;
+  font-style: italic;
+  margin: 12px 0 16px 0;
+  letter-spacing: -0.005em;
+}
+.quad-quote::before {
+  content: "「";
+  color: var(--clay);
+  font-style: normal;
+}
+.quad-quote::after {
+  content: "」";
+  color: var(--clay);
+  font-style: normal;
+}
+.quad-note {
+  font-family: var(--font-sans);
+  font-size: 20px;
+  line-height: 1.55;
+  color: var(--ink-mute);
+  margin: 0;
+}
+
+/* ============================================================
+ * Purposes grid (4 × 2 — Claude Code を使う 8 領域)
+ * ============================================================ */
+.purposes {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px 18px;
+  margin-top: 8px;
+}
+.purpose-cell {
+  padding: 12px 14px 14px 16px;
+  border-left: 3px solid var(--clay);
+  background: rgba(204, 120, 92, 0.05);
+  border-radius: 0 4px 4px 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 180px;
+}
+.purpose-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.purpose-icon {
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+  border-radius: 6px;
+  background: rgba(204, 120, 92, 0.12);
+  overflow: hidden;
+}
+.purpose-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.purpose-meta {
+  flex: 1;
+  min-width: 0;
+}
+.purpose-num {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--clay-deep);
+  font-weight: 600;
+  margin: 0 0 3px 0;
+  text-transform: uppercase;
+}
+.purpose-title {
+  font-family: var(--font-serif);
+  font-size: 21px;
+  font-weight: 600;
+  color: var(--ink-strong);
+  margin: 0;
+  line-height: 1.15;
+  letter-spacing: -0.005em;
+}
+.purpose-more {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  color: var(--ink-2);
+  line-height: 1.45;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.purpose-more li {
+  margin-bottom: 5px;
+  padding-left: 12px;
+  position: relative;
+}
+.purpose-more li::before {
+  content: "・";
+  position: absolute;
+  left: 0;
+  color: var(--clay);
+}
+.purpose-more li:last-child {
+  margin-bottom: 0;
+}
+
+/* ============================================================
+ * Stats grid (large numerical evidence)
+ * ============================================================ */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 56px;
+  margin-top: 16px;
+}
+.stat {
+  display: flex;
+  flex-direction: column;
+}
+.stat-num {
+  font-family: var(--font-serif);
+  font-size: 92px;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--clay-deep);
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
+.stat-unit {
+  font-size: 56px;
+  color: var(--clay);
+}
+.stat-label {
+  font-family: var(--font-sans);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 12px;
+  letter-spacing: -0.005em;
+}
+.stat-note {
+  font-family: var(--font-sans);
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--ink-mute);
+}
+
+/* ============================================================
+ * Roadmap (vertical numbered list, e.g. lecture series outline)
+ * ============================================================ */
+.roadmap {
+  display: flex;
+  flex-direction: column;
+  margin-top: 16px;
+  border-top: 1px solid var(--rule);
+}
+.rm-row {
+  display: grid;
+  grid-template-columns: 96px 1fr auto;
+  align-items: baseline;
+  gap: 32px;
+  padding: 14px 4px;
+  border-bottom: 1px solid var(--rule);
+}
+.rm-num {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 32px;
+  font-weight: 500;
+  color: var(--clay);
+  letter-spacing: -0.005em;
+}
+.rm-title {
+  font-family: var(--font-serif);
+  font-size: 26px;
+  line-height: 1.3;
+  color: var(--ink);
+  font-weight: 500;
+}
+.rm-tag {
+  font-family: var(--font-sans);
+  font-size: 17px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  font-weight: 500;
+}
+
+/* ============================================================
+ * Progress strip — 下部に全スライドの位置を表示
+ * （scripts/progress-strip.js が自動で各スライドに注入する）
+ * ============================================================ */
+.progress-strip {
+  position: absolute;
+  bottom: 96px;
+  left: 112px;
+  right: 112px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-sans);
+  pointer-events: none;
+}
+.ps-step {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex: 0 1 auto;
+  min-width: 0;
+}
+.ps-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--rule);
+  flex-shrink: 0;
+}
+.ps-step.active .ps-dot {
+  background: var(--clay);
+  width: 9px;
+  height: 9px;
+  box-shadow: 0 0 0 4px var(--clay-haze);
+}
+.ps-label {
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  color: var(--ink-light);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ps-step.active .ps-label {
+  color: var(--clay-deep);
+  font-weight: 600;
+}
+
+/* ============================================================
+ * Solution header (large 01/02/03 number + title)
+ * ============================================================ */
+.solution-header {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 48px;
+  align-items: baseline;
+  margin: 0 0 16px 0;
+}
+.solution-num {
+  font-family: var(--font-serif);
+  font-size: 200px;
+  font-weight: 500;
+  line-height: 0.85;
+  color: var(--clay);
+  letter-spacing: -0.04em;
+  text-align: center;
+}
+
+/* ============================================================
+ * Voices — quoted callout block (e.g. "他の声" references)
+ * ============================================================ */
+.voices {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  margin: 36px 0 24px 0;
+  padding: 28px 36px;
+  background: var(--cream-soft);
+  border-left: 3px solid var(--clay);
+}
+.voice {}
+.voice-quote {
+  font-family: var(--font-serif);
+  font-size: 26px;
+  font-style: italic;
+  color: var(--ink);
+  font-weight: 500;
+  line-height: 1.4;
+  margin: 0 0 10px 0;
+  letter-spacing: -0.005em;
+}
+.voice-attr {
+  font-family: var(--font-sans);
+  font-size: 17px;
+  color: var(--ink-mute);
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+
+/* ============================================================
+ * Resources — recommended external resources block
+ * ============================================================ */
+.resources {
+  margin-top: 36px;
+  padding-top: 24px;
+  border-top: 1px solid var(--rule);
+}
+.res-label {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--clay);
+  font-weight: 600;
+  margin-bottom: 18px;
+}
+.res-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+.res-cell {}
+.res-channel {
+  font-family: var(--font-sans);
+  font-size: 17px;
+  color: var(--ink-mute);
+  margin-bottom: 8px;
+  letter-spacing: 0.02em;
+}
+.res-video {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  color: var(--ink);
+  font-weight: 500;
+  line-height: 1.35;
+  text-decoration: none;
+  border-bottom: 1px solid var(--clay);
+  display: inline;
+}
+.res-video:hover { color: var(--clay-deep); }
+.res-meta {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  color: var(--ink-light);
+  margin-top: 10px;
+  letter-spacing: 0.02em;
+}
