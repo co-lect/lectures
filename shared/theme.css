@@ -459,20 +459,32 @@ code, .mono {
   height: 130px;
   object-fit: cover;
   border-radius: 4px;
-  grid-row: span 3;
+  grid-row: span 4;
 }
 .quad-cell .col-label,
 .quad-cell .quad-quote,
-.quad-cell .quad-note {
+.quad-cell .quad-note,
+.quad-cell .quad-more {
   grid-column: 2;
 }
 .quad-cell .quad-quote {
-  font-size: 24px;
+  font-size: 22px;
   line-height: 1.4;
-  margin: 6px 0 8px 0;
+  margin: 4px 0 6px 0;
 }
 .quad-cell .quad-note {
   font-size: 17px;
+}
+.quad-cell .quad-more {
+  margin: 4px 0 0 0;
+  padding: 0 0 0 18px;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+.quad-cell .quad-more li {
+  margin-bottom: 3px;
 }
 .quad-quote {
   font-family: var(--font-serif);
@@ -500,6 +512,90 @@ code, .mono {
   line-height: 1.55;
   color: var(--ink-mute);
   margin: 0;
+}
+
+/* ============================================================
+ * Purposes grid (4 × 2 — Claude Code を使う 8 領域)
+ * ============================================================ */
+.purposes {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px 18px;
+  margin-top: 8px;
+}
+.purpose-cell {
+  padding: 12px 14px 14px 16px;
+  border-left: 3px solid var(--clay);
+  background: rgba(204, 120, 92, 0.05);
+  border-radius: 0 4px 4px 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 180px;
+}
+.purpose-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.purpose-icon {
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+  border-radius: 6px;
+  background: rgba(204, 120, 92, 0.12);
+  overflow: hidden;
+}
+.purpose-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.purpose-meta {
+  flex: 1;
+  min-width: 0;
+}
+.purpose-num {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--clay-deep);
+  font-weight: 600;
+  margin: 0 0 3px 0;
+  text-transform: uppercase;
+}
+.purpose-title {
+  font-family: var(--font-serif);
+  font-size: 21px;
+  font-weight: 600;
+  color: var(--ink-strong);
+  margin: 0;
+  line-height: 1.15;
+  letter-spacing: -0.005em;
+}
+.purpose-more {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  color: var(--ink-2);
+  line-height: 1.45;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.purpose-more li {
+  margin-bottom: 5px;
+  padding-left: 12px;
+  position: relative;
+}
+.purpose-more li::before {
+  content: "・";
+  position: absolute;
+  left: 0;
+  color: var(--clay);
+}
+.purpose-more li:last-child {
+  margin-bottom: 0;
 }
 
 /* ============================================================

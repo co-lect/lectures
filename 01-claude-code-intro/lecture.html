@@ -9,7 +9,7 @@
   Lecture 01: なぜ今、Claude Code を学ぶのか
   AI Coding Series for fellow students at Kochi Univ. of Tech.
 
-  この HTML は人間と AI（Claude Code / Codex 等）が一緒に読むことを
+  この HTML は人間と AI（Claude Code / ChatGPT 等）が一緒に読むことを
   前提に作られています。AI に「このファイルを読んで」と渡せば、
   シリーズ全体の文脈を共有できます。
 
@@ -72,7 +72,7 @@
           <div class="col-label">For Humans</div>
           <div class="col-body">
             <p>ブラウザで開いて、<strong>左右キー</strong>でスライドを進める。</p>
-            <p>隣に <code>Claude Code</code> / <code>ChatGPT</code> を置いて、気になる箇所は <strong>その場で深掘り</strong> してもらう。</p>
+            <p>隣に <code>Claude Code</code> / <code>Codex</code> を置いて、気になる箇所は <strong>その場で深掘り</strong> してもらう。</p>
           </div>
         </div>
 
@@ -97,135 +97,201 @@
   </section>
 
   <!-- ============================================================
-       Slide 3 — モデル vs サービス（用語の整理）
+       Slide 3 — Claude と Claude Code の違い（粒度の整理）
        ============================================================ -->
-  <section data-label="モデル vs サービス — 用語の整理">
+  <section data-label="Claude と Claude Code — 粒度が違う">
     <div class="meta-line">
-      <span><span class="accent">Chapter 1</span> · 用語の整理</span>
+      <span><span class="accent">Chapter 1</span> · 粒度の整理</span>
       <span>03 / 10</span>
     </div>
 
     <div class="content">
-      <div class="content-eyebrow">そもそも「Claude」って、何を指している？</div>
-      <h2 class="content-title">モデル と サービス、別物です</h2>
+      <div class="content-eyebrow">混同しがちなので、最初に</div>
+      <h2 class="content-title">「Claude」と「Claude Code」は、<em>別物</em></h2>
       <p class="content-subtitle">
-        Claude（モデル） / claude.ai（Web） / Claude Code（CLI） — まず整理する
+        モデル（脳）と、ツール（手足） — <strong>別の階層</strong> の話
       </p>
       <hr class="rule">
 
-      <img src="_assets/model-service-layers-v2.png" alt="AI モデルとサービスの層構造：MODEL (Claude/GPT/Gemini) → CLI (ターミナル画面) / 会話 Web アプリ (claude.ai のチャット画面) / API (コードエディタ画面)" style="width: 100%; max-width: 1500px; margin: 12px 0 16px 0; display: block;">
+      <div class="cols-2" style="margin-top: 32px; gap: 56px;">
+        <div style="border: 1px solid var(--rule); padding: 32px 30px; background: rgba(0,0,0,0.02); border-radius: 6px;">
+          <div class="col-label">Claude</div>
+          <h3 style="font-family: var(--font-serif); font-size: 32px; color: var(--ink-strong); margin: 8px 0 16px 0; font-weight: 600; letter-spacing: -0.005em;">"脳" — AI モデル</h3>
+          <p style="font-family: var(--font-sans); font-size: 19px; color: var(--ink); margin: 0 0 14px 0; line-height: 1.55;">
+            Anthropic が作る言語モデル本体。<strong>賢さの源</strong>。
+          </p>
+          <p style="font-family: var(--font-sans); font-size: 17px; color: var(--ink-mute); margin: 0; line-height: 1.55; font-style: italic;">
+            単体では何もできない。会話アプリやツールに「載って」初めて動く。
+          </p>
+        </div>
 
-      <p class="aside">
-        ※ <strong>中身（モデル）は同じでも、ラッピング（サービス）次第で できることが変わる</strong>。OpenAI 系も同じ構造（GPT モデル / ChatGPT / Codex CLI / API）。次のスライドで CLI が PC で何をやるのか、具体的に。
+        <div style="border: 2px solid var(--clay-deep); padding: 32px 30px; background: rgba(204, 120, 92, 0.08); border-radius: 6px;">
+          <div class="col-label" style="color: var(--clay-deep);">Claude Code</div>
+          <h3 style="font-family: var(--font-serif); font-size: 32px; color: var(--clay-deep); margin: 8px 0 16px 0; font-weight: 600; letter-spacing: -0.005em;">"手足" — ツール</h3>
+          <p style="font-family: var(--font-sans); font-size: 19px; color: var(--ink); margin: 0 0 14px 0; line-height: 1.55;">
+            Claude を載せて、<strong>PC を操作する</strong>ためのツール（Anthropic 公式）。
+          </p>
+          <p style="font-family: var(--font-sans); font-size: 17px; color: var(--clay-deep); margin: 0; line-height: 1.55; font-style: italic;">
+            本講義の主役はこちら。脳ではなく、PC を動かす "手足" の話。
+          </p>
+        </div>
+      </div>
+
+      <p class="aside" style="margin-top: 32px;">
+        ※ 同じ "Claude" でも、Web の <code>claude.ai</code> は「会話するだけ」、Claude Code は「PC を操作する」。<strong>同じ脳でも、ツール次第で できることが変わる</strong>。次のスライドでは、その Claude Code 自体にも種類があることを見る。
       </p>
     </div>
 
     <div class="brand">
       <span>Lecture 01</span>
-      <span>Chapter 1 · 用語の整理</span>
+      <span>Chapter 1 · 粒度の整理</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Slide 4 — Claude Code のバリエーション（CLI 版に絞る）
+       ============================================================ -->
+  <section data-label="どの Claude Code か — CLI 版に絞る">
+    <div class="meta-line">
+      <span><span class="accent">Chapter 2</span> · どの Claude Code か</span>
+      <span>04 / 10</span>
+    </div>
+
+    <div class="content">
+      <div class="content-eyebrow">本題に入る前に、もう一つだけ整理を</div>
+      <h2 class="content-title">「Claude Code」は、実は <em>複数</em> ある</h2>
+      <p class="content-subtitle">
+        この講義では、最も汎用な <strong>CLI 型</strong> に絞ります
+      </p>
+      <hr class="rule">
+
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; margin-top: 28px;">
+        <!-- CLI - HIGHLIGHTED -->
+        <div style="border: 3px solid var(--clay-deep); padding: 24px 22px; border-radius: 6px; background: rgba(204, 120, 92, 0.08); position: relative;">
+          <div style="font-family: var(--font-sans); font-size: 12px; letter-spacing: 0.18em; color: var(--clay-deep); font-weight: 700; margin-bottom: 8px; text-transform: uppercase;">▼ 本講義はこれ</div>
+          <h3 style="font-family: var(--font-serif); font-size: 32px; color: var(--clay-deep); margin: 0 0 14px 0; font-weight: 600; letter-spacing: -0.005em;">CLI</h3>
+          <p style="font-family: var(--font-sans); font-size: 17px; color: var(--ink); margin: 0 0 14px 0; line-height: 1.5;">
+            ターミナルで <code>claude</code> と打って起動。
+          </p>
+          <p style="font-family: var(--font-sans); font-size: 15px; color: var(--ink-mute); margin: 0; line-height: 1.55;">
+            最も汎用。<strong>PC 全体を操作</strong> できるのはこの形だけ。
+          </p>
+        </div>
+
+        <!-- IDE -->
+        <div style="border: 1px solid var(--rule); padding: 24px 22px; border-radius: 6px;">
+          <div style="font-family: var(--font-sans); font-size: 12px; letter-spacing: 0.18em; color: var(--ink-mute); font-weight: 700; margin-bottom: 8px; text-transform: uppercase;">エディタ内</div>
+          <h3 style="font-family: var(--font-serif); font-size: 32px; color: var(--ink); margin: 0 0 14px 0; font-weight: 600; letter-spacing: -0.005em;">IDE 拡張</h3>
+          <p style="font-family: var(--font-sans); font-size: 17px; color: var(--ink); margin: 0 0 14px 0; line-height: 1.5;">
+            VS Code / JetBrains の中で動く。
+          </p>
+          <p style="font-family: var(--font-sans); font-size: 15px; color: var(--ink-mute); margin: 0; line-height: 1.55;">
+            コーディング作業に最適化。中身は CLI と同じ。
+          </p>
+        </div>
+
+        <!-- Web -->
+        <div style="border: 1px solid var(--rule); padding: 24px 22px; border-radius: 6px;">
+          <div style="font-family: var(--font-sans); font-size: 12px; letter-spacing: 0.18em; color: var(--ink-mute); font-weight: 700; margin-bottom: 8px; text-transform: uppercase;">ブラウザ</div>
+          <h3 style="font-family: var(--font-serif); font-size: 32px; color: var(--ink); margin: 0 0 14px 0; font-weight: 600; letter-spacing: -0.005em;">Web</h3>
+          <p style="font-family: var(--font-sans); font-size: 17px; color: var(--ink); margin: 0 0 14px 0; line-height: 1.5;">
+            <code>claude.ai/code</code> でアクセス。
+          </p>
+          <p style="font-family: var(--font-sans); font-size: 15px; color: var(--ink-mute); margin: 0; line-height: 1.55;">
+            軽い対話・共有向け。インストール不要。
+          </p>
+        </div>
+
+        <!-- Desktop -->
+        <div style="border: 1px solid var(--rule); padding: 24px 22px; border-radius: 6px;">
+          <div style="font-family: var(--font-sans); font-size: 12px; letter-spacing: 0.18em; color: var(--ink-mute); font-weight: 700; margin-bottom: 8px; text-transform: uppercase;">ネイティブ</div>
+          <h3 style="font-family: var(--font-serif); font-size: 32px; color: var(--ink); margin: 0 0 14px 0; font-weight: 600; letter-spacing: -0.005em;">Desktop</h3>
+          <p style="font-family: var(--font-sans); font-size: 17px; color: var(--ink); margin: 0 0 14px 0; line-height: 1.5;">
+            Mac / Windows のアプリ。
+          </p>
+          <p style="font-family: var(--font-sans); font-size: 15px; color: var(--ink-mute); margin: 0; line-height: 1.55;">
+            GUI ベース。CLI に慣れない人向け。
+          </p>
+        </div>
+      </div>
+
+      <p class="aside" style="margin-top: 32px;">
+        ※ CLI を扱う理由は「<strong>PC 全体を操作する力</strong>」が一番強いから。エディタ内・ブラウザ内に閉じない汎用 PC 操作の入口。<br>
+        参考：日本語解説は YouTube の <strong>「AI でサボろうチャンネル」</strong> と <strong>「にゃんたの AI チャンネル」</strong> がわかりやすい（最終ページにリンクあり）。
+      </p>
+    </div>
+
+    <div class="brand">
+      <span>Lecture 01</span>
+      <span>Chapter 2 · どの Claude Code か</span>
     </div>
   </section>
 
   <!-- ============================================================
        Slide 4 — Claude Code とは：PC で働く AI
        ============================================================ -->
-  <section data-label="Claude Code とは — PC で働く AI">
+  <section data-label="PC で働く AI — Claude Code の正体">
     <div class="meta-line">
-      <span><span class="accent">Chapter 2</span> · Claude Code とは</span>
-      <span>04 / 10</span>
-    </div>
-
-    <div class="content">
-      <div class="content-eyebrow">そもそも、Claude Code って何？</div>
-      <h2 class="content-title">チャットボットじゃない。「<em>AI 社員</em>」</h2>
-      <p class="content-subtitle">
-        会話する AI と、PC で働く AI ── <strong>役割が違う</strong>
-      </p>
-      <hr class="rule">
-
-      <div style="display: grid; grid-template-columns: 700px 1fr; gap: 56px; align-items: start; margin-top: 8px;">
-        <div>
-          <img src="_assets/horse-harness.png" alt="Anthropic 公式の比喩：Claude=馬、Claude Code=馬具" style="width: 100%; display: block;">
-          <p style="font-family: var(--font-sans); font-size: 17px; line-height: 1.55; color: var(--ink-mute); margin: 14px 0 0 0;">
-            ※ <strong>Anthropic 公式の比喩</strong>：<strong>Claude（モデル）= 馬</strong>、<strong>Claude Code = 馬具</strong>。同じ馬でも、馬具次第で「会話する馬」にも「<em>働ける馬</em>」にもなる。
-          </p>
-        </div>
-
-        <div style="font-family: var(--font-sans);">
-          <div style="margin-bottom: 32px;">
-            <div class="col-label" style="margin-bottom: 12px;">ChatGPT / claude.ai</div>
-            <p style="font-size: 26px; font-weight: 600; color: var(--ink); margin: 0 0 10px 0;">役割：<strong>「相談相手」</strong></p>
-            <p style="font-size: 20px; color: var(--ink-2); margin: 0 0 6px 0; line-height: 1.55;">会話するだけ。答えを返す → あなたがコピペで運ぶ。</p>
-            <p style="font-size: 18px; font-style: italic; color: var(--ink-mute); margin: 0; line-height: 1.5;">"メールで賢い人とやり取りする" ような距離感。</p>
-          </div>
-
-          <div>
-            <div class="col-label" style="margin-bottom: 12px; color: var(--clay-deep);">Claude Code</div>
-            <p style="font-family: var(--font-serif); font-size: 28px; font-weight: 500; color: var(--clay-deep); margin: 0 0 10px 0;">役割：<em>「AI 社員」</em></p>
-            <p style="font-size: 20px; color: var(--ink-2); margin: 0 0 6px 0; line-height: 1.55;">会話しない、<strong>動く</strong>。ファイルを <em>読み・書き・実行</em> する。</p>
-            <p style="font-size: 18px; font-style: italic; color: var(--ink-mute); margin: 0; line-height: 1.5;">"同僚が隣に座って一緒に作業する" ような距離感。</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="brand">
-      <span>Lecture 01</span>
-      <span>Chapter 2 · Claude Code とは</span>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       Slide 4 — AI コーディング 4 年史
-       ============================================================ -->
-  <section data-label="AI コーディング 4 年史 — 3 段で降りてきた">
-    <div class="meta-line">
-      <span><span class="accent">Chapter 3</span> · AI コーディング 4 年史</span>
+      <span><span class="accent">Chapter 3</span> · Claude Code とは</span>
       <span>05 / 10</span>
     </div>
 
     <div class="content">
-      <div class="content-eyebrow">では、なぜ今こうなったか — 4 年を振り返る</div>
-      <h2 class="content-title">AI が、PC のどこまで触れるかの歴史</h2>
+      <div class="content-eyebrow">そもそも、Claude Code って何？</div>
+      <h2 class="content-title">画面の <em>こちら側</em> で動く、AI</h2>
       <p class="content-subtitle">
-        ブラウザ → エディタ → PC 全体。AI が触れる範囲が広がるたび、人間の役割が変わった
+        ChatGPT は <strong>会話する</strong>。Claude Code は <strong>手を動かす</strong>
       </p>
       <hr class="rule">
 
-      <div class="timeline">
-        <div class="step active">
-          <div class="step-year">2022 / 11</div>
-          <div class="step-title">ChatGPT</div>
-          <div class="step-body">
-            AI は <strong>PC の外</strong>。<br>
-            <em>汎用</em> な会話相手。<br>
-            結果は人間が <strong>コピペで運ぶ</strong>。
+      <div class="cols-2" style="margin-top: 22px; gap: 56px;">
+        <!-- ChatGPT 側 -->
+        <div>
+          <div class="col-label" style="margin-bottom: 12px;">ChatGPT / claude.ai</div>
+          <div style="font-family: var(--font-serif); font-size: 28px; color: var(--ink-strong); margin-bottom: 16px; letter-spacing: 0.02em;">
+            画面の <em>向こう</em><span style="font-size: 19px; color: var(--ink-mute); font-style: normal;">（クラウド）</span>
           </div>
+          <div style="background: rgba(0,0,0,0.04); padding: 12px 18px; border-radius: 4px; margin-bottom: 8px;">
+            <div style="font-size: 14px; color: var(--ink-mute); margin-bottom: 3px; letter-spacing: 0.04em;">あなた</div>
+            <div style="font-size: 19px; color: var(--ink); line-height: 1.45;">「この CSV、月別に集計するには？」</div>
+          </div>
+          <div style="background: rgba(0,0,0,0.04); padding: 12px 18px; border-radius: 4px; margin-bottom: 12px;">
+            <div style="font-size: 14px; color: var(--ink-mute); margin-bottom: 3px; letter-spacing: 0.04em;">AI</div>
+            <div style="font-size: 19px; color: var(--ink); line-height: 1.45;">「こうすれば集計できます」<br><span style="color: var(--ink-mute); font-size: 16px;">→ 手順を返す</span></div>
+          </div>
+          <p style="font-size: 19px; color: var(--ink-mute); margin: 0; font-style: italic; font-family: var(--font-serif);">
+            → あなたが <strong>自分で手を動かす</strong>
+          </p>
         </div>
-        <div class="step active">
-          <div class="step-year">2021 — 2024</div>
-          <div class="step-title">Copilot · Cursor</div>
-          <div class="step-body">
-            AI が <strong>エディタの中</strong>まで来た。<br>
-            ただし用途は <em>コーディングに特化</em>。<br>
-            一緒に「<strong>コードを書く</strong>」段階。
+
+        <!-- Claude Code 側 -->
+        <div>
+          <div class="col-label" style="margin-bottom: 12px; color: var(--clay-deep);">Claude Code</div>
+          <div style="font-family: var(--font-serif); font-size: 28px; color: var(--clay-deep); margin-bottom: 16px; letter-spacing: 0.02em;">
+            画面の <em>こちら側</em><span style="font-size: 19px; color: var(--ink-mute); font-style: normal;">（あなたの PC）</span>
           </div>
-        </div>
-        <div class="step active">
-          <div class="step-year">2024 —</div>
-          <div class="step-title">Claude Code</div>
-          <div class="step-body">
-            AI が <strong>PC そのもの</strong>を操作する。<br>
-            コーディングを超えた <em>汎用 PC 操作</em>。<br>
-            <strong>PC のコックピット</strong> が AI に渡った。
+          <div style="background: rgba(204, 120, 92, 0.08); padding: 12px 18px; border-radius: 4px; margin-bottom: 8px;">
+            <div style="font-size: 14px; color: var(--clay-deep); margin-bottom: 3px; letter-spacing: 0.04em;">あなた</div>
+            <div style="font-size: 19px; color: var(--ink); line-height: 1.45;">「この CSV、月別に集計しといて」</div>
           </div>
+          <div style="background: rgba(204, 120, 92, 0.08); padding: 12px 18px; border-radius: 4px; margin-bottom: 12px;">
+            <div style="font-size: 14px; color: var(--clay-deep); margin-bottom: 3px; letter-spacing: 0.04em;">AI</div>
+            <div style="font-size: 19px; color: var(--ink); line-height: 1.45;"><em>読む → 集計 → 保存</em><br><span style="color: var(--ink-mute); font-size: 16px;">→ PC で実行</span></div>
+          </div>
+          <p style="font-size: 19px; color: var(--clay-deep); margin: 0; font-style: italic; font-family: var(--font-serif);">
+            → あなたは <strong>結果を確認するだけ</strong>
+          </p>
         </div>
       </div>
+
+      <p style="font-family: var(--font-serif); font-size: 21px; color: var(--ink-mute); margin: 26px 0 0 0; font-style: italic; text-align: center;">
+        同じ Claude が、<strong>場所が変わるだけで</strong>「答える AI」から「やってくれる AI」になる。
+      </p>
     </div>
 
     <div class="brand">
       <span>Lecture 01</span>
-      <span>Chapter 3 · 4 年史</span>
+      <span>Chapter 3 · Claude Code とは</span>
     </div>
   </section>
 
@@ -280,7 +346,7 @@
   <!-- ============================================================
        Slide 7 — 何ができるか（4 象限）
        ============================================================ -->
-  <section data-label="何ができるか — 4 つの実例">
+  <section data-label="何ができるか — 8 領域で MECE に">
     <div class="meta-line">
       <span><span class="accent">Chapter 5</span> · 何ができるか</span>
       <span>07 / 10</span>
@@ -288,38 +354,145 @@
 
     <div class="content">
       <div class="content-eyebrow">理屈はわかった、では具体的に何が頼めるか</div>
-      <h2 class="content-title">PC に、何が頼めるのか</h2>
+      <h2 class="content-title">PC に頼めることの、ほぼ全領域</h2>
       <p class="content-subtitle">
-        ターミナルに 1 行頼むと、PC が代わりに動いてくれる
+        日常の作業を <strong>8 つの目的</strong> に切ると、Claude Code はそのほぼ全部に効く
       </p>
       <hr class="rule">
 
-      <div class="quad">
-        <div class="quad-cell">
-          <img src="_assets/persona-tl.png" alt="学生がノートPCでレポート作成" class="quad-img">
-          <div class="col-label">学生 / レポート</div>
-          <p class="quad-quote">PDF を 30 本読んで、引用したい段落を Markdown に集約して</p>
-          <p class="quad-note">参考文献の整形も、出典 URL の付与もまとめて。</p>
+      <div class="purposes">
+        <!-- 01 リサーチ -->
+        <div class="purpose-cell">
+          <div class="purpose-head">
+            <div class="purpose-icon"><img src="_assets/use-research.png" alt="リサーチ"></div>
+            <div class="purpose-meta">
+              <div class="purpose-num">01 · Research</div>
+              <h3 class="purpose-title">リサーチ</h3>
+            </div>
+          </div>
+          <ul class="purpose-more">
+            <li>主要論文を 30 本読んで、争点をまとめて</li>
+            <li>志望企業 20 社の事業と決算を要約して</li>
+            <li>業界トレンドを直近 1 年で整理して</li>
+          </ul>
         </div>
-        <div class="quad-cell">
-          <img src="_assets/persona-tr.png" alt="会社員が Excel を整理" class="quad-img">
-          <div class="col-label">事務 / Excel</div>
-          <p class="quad-quote">このフォルダの Excel 全部見て、月別のシートに整理して</p>
-          <p class="quad-note">手動で 1 日かかる作業が、対話 5 分で片付く。</p>
+
+        <!-- 02 コーディング・データ処理 -->
+        <div class="purpose-cell">
+          <div class="purpose-head">
+            <div class="purpose-icon"><img src="_assets/use-code.png" alt="コーディング・データ処理"></div>
+            <div class="purpose-meta">
+              <div class="purpose-num">02 · Code &amp; Data</div>
+              <h3 class="purpose-title">コーディング・データ</h3>
+            </div>
+          </div>
+          <ul class="purpose-more">
+            <li>Issue #42 を読んで PR まで作って</li>
+            <li>1 万行の CSV から外れ値と相関を抽出して</li>
+            <li>A/B テストの結果に統計検定をかけて</li>
+          </ul>
         </div>
-        <div class="quad-cell">
-          <img src="_assets/persona-bl.png" alt="研究者がデータを分析" class="quad-img">
-          <div class="col-label">研究 / データ分析</div>
-          <p class="quad-quote">実験 CSV を 30 ファイル読んで、月別の傾向グラフにまとめて</p>
-          <p class="quad-note">スクリプトを書く必要はない。意図を伝えるだけ。</p>
+
+        <!-- 03 自動化 -->
+        <div class="purpose-cell">
+          <div class="purpose-head">
+            <div class="purpose-icon"><img src="_assets/use-automation.png" alt="自動化"></div>
+            <div class="purpose-meta">
+              <div class="purpose-num">03 · Automation</div>
+              <h3 class="purpose-title">自動化</h3>
+            </div>
+          </div>
+          <ul class="purpose-more">
+            <li>1 週間分の議事録を 1 ページの一覧にまとめて</li>
+            <li>フォルダの PDF を命名ルールでリネームして</li>
+            <li>形式変換を一括処理化して</li>
+          </ul>
         </div>
-        <div class="quad-cell">
-          <img src="_assets/persona-br.png" alt="エンジニアが GitHub の Issue/PR を確認" class="quad-img">
-          <div class="col-label">エンジニア / Issue → PR</div>
-          <p class="quad-quote">Issue #42 を読んで、ブランチ切って、PR まで作って</p>
-          <p class="quad-note">ロードマップ消化が、人間の 3〜5 倍速になる。</p>
+
+        <!-- 04 文書作成 -->
+        <div class="purpose-cell">
+          <div class="purpose-head">
+            <div class="purpose-icon"><img src="_assets/use-doc.png" alt="文書作成"></div>
+            <div class="purpose-meta">
+              <div class="purpose-num">04 · Writing</div>
+              <h3 class="purpose-title">文書作成</h3>
+            </div>
+          </div>
+          <ul class="purpose-more">
+            <li>議事録 5 本から 1 ページ要約を作って</li>
+            <li>卒論の章立てと序章ドラフトを書いて</li>
+            <li>契約書をレビューして改稿案を出して</li>
+          </ul>
+        </div>
+
+        <!-- 05 ビジュアル制作 -->
+        <div class="purpose-cell">
+          <div class="purpose-head">
+            <div class="purpose-icon"><img src="_assets/use-slide.png" alt="ビジュアル制作"></div>
+            <div class="purpose-meta">
+              <div class="purpose-num">05 · Slides &amp; Charts</div>
+              <h3 class="purpose-title">スライド・図表</h3>
+            </div>
+          </div>
+          <ul class="purpose-more">
+            <li>50 ページの資料を 10 枚スライドに圧縮して</li>
+            <li>データから棒グラフと注釈を作って</li>
+            <li>HTML スライドを動的に生成して</li>
+          </ul>
+        </div>
+
+        <!-- 06 クリエイティブ素材 -->
+        <div class="purpose-cell">
+          <div class="purpose-head">
+            <div class="purpose-icon"><img src="_assets/use-creative.png" alt="クリエイティブ素材"></div>
+            <div class="purpose-meta">
+              <div class="purpose-num">06 · Creative <span style="font-weight: 400;">(他 AI 連携)</span></div>
+              <h3 class="purpose-title">画像・動画</h3>
+            </div>
+          </div>
+          <ul class="purpose-more">
+            <li>OpenAI Image でヒーロー画像を生成して</li>
+            <li>SNS 用バナーを画像生成 AI で 5 案出して</li>
+            <li>Sora で短い動画クリップを生成して</li>
+          </ul>
+        </div>
+
+        <!-- 07 連絡管理 -->
+        <div class="purpose-cell">
+          <div class="purpose-head">
+            <div class="purpose-icon"><img src="_assets/use-comm.png" alt="連絡管理"></div>
+            <div class="purpose-meta">
+              <div class="purpose-num">07 · Communication</div>
+              <h3 class="purpose-title">連絡管理</h3>
+            </div>
+          </div>
+          <ul class="purpose-more">
+            <li>Slack の長スレ要約と要返信リスト化</li>
+            <li>100 通のメールから ToDo を抽出して</li>
+            <li>日本語 → 英語のメール下書きを作って</li>
+          </ul>
+        </div>
+
+        <!-- 08 勉強・研究 -->
+        <div class="purpose-cell">
+          <div class="purpose-head">
+            <div class="purpose-icon"><img src="_assets/use-learn.png" alt="勉強・研究"></div>
+            <div class="purpose-meta">
+              <div class="purpose-num">08 · Learning</div>
+              <h3 class="purpose-title">勉強・研究</h3>
+            </div>
+          </div>
+          <ul class="purpose-more">
+            <li>ページ最適化の基礎をわかりやすく教えて</li>
+            <li>この目的に対するベストプラクティスを示して</li>
+            <li>講義ノートを試験対策プリントに整形して</li>
+          </ul>
         </div>
       </div>
+
+      <p style="font-family: var(--font-serif); font-size: 17px; color: var(--ink-mute); margin: 12px 0 0 0; font-style: italic; text-align: center;">
+        一つの道具で、ここまで覆える。<strong>領域の境界が、なくなりつつある。</strong>
+      </p>
     </div>
 
     <div class="brand">
@@ -429,33 +602,32 @@
   <!-- ============================================================
        Slide 10 — 終わりに
        ============================================================ -->
-  <section data-label="終わりに — 次回までに考えてほしい問い">
+  <section data-label="終わりに — 続きは触ってから">
     <div class="meta-line">
-      <span><span class="accent">Coda</span> · 次回までに</span>
+      <span><span class="accent">Coda</span> · 終わりに</span>
       <span>10 / 10</span>
     </div>
 
     <div class="content">
       <div class="content-eyebrow">第 1 回はここまで</div>
-      <h2 class="content-title">一つだけ、問いを残します</h2>
+      <h2 class="content-title">続きは、触ってから</h2>
       <p class="content-subtitle">
-        テクノロジーが、手段を増やしてくれた
+        ここまで聞いてくれて、ありがとうございました
       </p>
       <hr class="rule">
 
-      <div style="margin-top: 8px;">
-        <span class="pullquote-mark" style="font-size: 88px; margin-bottom: 12px;">&ldquo;</span>
-        <p class="pullquote" style="font-size: 50px; line-height: 1.35;">
-          ひとりで、何でもできるようになった。<br>
-          だからこそ、これからは <em>「手段よりも目的」</em> が、問われる。
+      <div style="margin-top: 14px;">
+        <p style="font-size: 38px; line-height: 1.55; color: var(--ink-strong); margin: 0; font-family: var(--font-serif);">
+          今日の話で <strong>「これ、自分にも頼めそう」</strong> と感じたタスクが<br>
+          一つでもあれば、それで一度、試してみてください。
         </p>
-        <p style="font-family: var(--font-serif); font-size: 26px; color: var(--ink-mute); margin: 16px 0 0 0; font-style: italic; letter-spacing: 0.02em;">
-          ── あなたは、何のために、何を、作ってみたいですか。
+        <p style="font-family: var(--font-serif); font-size: 26px; color: var(--ink-mute); margin: 14px 0 0 0; font-style: italic; letter-spacing: 0.02em;">
+          ── レポートでも、Excel でも、CSV でも。
         </p>
       </div>
 
-      <div class="resources" style="margin-top: 20px;">
-        <div class="res-label">もう一歩、学びたい人へ — 参考になる 3 チャンネル</div>
+      <div class="resources" style="margin-top: 24px;">
+        <div class="res-label">自分のペースで深めたい人へ — 参考になる 3 チャンネル</div>
         <div class="res-grid">
           <div class="res-cell">
             <div class="res-channel">安野貴博の自由研究（29 万）</div>
@@ -497,14 +669,14 @@
 {
   "0": "表紙。第 1 回は『Claude Code 入門』。コーディング寄りの話は省き、純粋に Claude Code の正体と意義に絞る。",
   "1": "読み方の宣言。HTML だから AI も読めて編集もできる。資料は『概要のみ』、詳細は受講者の AI に聞いてもらう前提。",
-  "2": "用語の整理。Claude（モデル）/ claude.ai（Web アプリ）/ Claude Code（CLI）は別物。OpenAI も同様（GPT / ChatGPT / Codex CLI）。中身は同じでもラッピング次第。",
-  "3": "Claude Code とは（チャットボットじゃない、AI 社員）。ChatGPT/Claude (web) は会話するだけ、Claude Code は PC のターミナルで動いて手を動かす。馬・ハーネスの比喩で技術的裏付け。",
-  "4": "AI コーディング 4 年史を 1 枚に圧縮。ChatGPT (PCの外) → Copilot/Cursor (エディタ・コーディング特化) → Claude Code (PC全体・汎用)。",
+  "2": "粒度の整理。Claude（モデル＝脳）と Claude Code（ツール＝手足）は別物。同じ脳でも、ツール次第で『会話するだけ／PC を操作する』が変わる。本講義の主役は手足（Claude Code）の方。",
+  "3": "Claude Code には CLI / IDE 拡張 / Web / Desktop の 4 形式がある。本講義は最も汎用な CLI を扱う。理由：『PC 全体を操作する力』は CLI 形態だけが持つ強み。参考：YouTube の AI でサボろうチャンネル、にゃんたの AI チャンネル。",
+  "4": "Claude Code とは。場所軸（画面の向こう／こちら側）+ 動詞軸（答える／やってくれる）を 1 枚に統合。CSV 集計の対話例で『同じ Claude が場所が変わるだけで実行者になる』を伝える。補足：Anthropic は『Claude=馬／Claude Code=馬具』とも呼ぶ（口頭で）。",
   "5": "立ち位置の変化。PC を操作する人 → 指示する人。情報収集・パワポ・Web操作まで AI が勝手にやる時代。",
-  "6": "実例 4 つ：学生レポート / 事務 Excel / 研究データ分析 / エンジニア Issue→PR。'これ自分にも頼めるんだ' と感じる多様なシーン。",
+  "6": "MECE 8 領域：①リサーチ ②コーディング・データ処理 ③自動化 ④文書作成 ⑤スライド・図表 ⑥クリエイティブ（画像・動画、他 AI 連携） ⑦連絡管理 ⑧勉強・研究。'境界がなくなる' が着地メッセージ。",
   "7": "実績。ARR $30B（OpenAI 抜き）、評価額 $380B、Fortune 100 の 70% が採用。大企業も Deloitte 47 万人デプロイなど本格採用。",
   "8": "結論。検索エンジン・スマホ・GitHub — 最初に握った人が長く有利だった。Claude Code はその次の波。",
-  "9": "終わりに。哲学的着地：手段は揃った → ひとりで何でもできる → だからこそ目的が問われる。問いを残し、推薦動画 3 本を提示。"
+  "9": "終わりに。説教調は避け、お礼 →『これ自分にも頼めそうと感じたタスクで一度試して』→ 参考動画 3 本 → 次回案内。"
 }
 </script>
 
