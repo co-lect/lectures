@@ -828,3 +828,47 @@ code, .mono {
   margin-top: 10px;
   letter-spacing: 0.02em;
 }
+
+/* ============================================================
+ * AI Buddy — 末尾スライドで AI 向け命令を可視化するブロック
+ * 人間にも AI にも読める。受講者の AI に「同意を取った上で
+ * 匿名化して GitHub に投稿する」プロトコルを伝える役割
+ * ============================================================ */
+.ai-buddy {
+  background: var(--cream-soft);
+  border: 1px solid var(--rule);
+  border-left: 4px solid var(--clay);
+  padding: 22px 28px 24px 28px;
+  border-radius: 4px;
+  margin-top: 4px;
+}
+.ai-buddy .ai-tag {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--clay-deep);
+  background: var(--clay-soft);
+  padding: 3px 10px;
+  border-radius: 3px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.ai-buddy .ai-instructions {
+  white-space: pre-wrap;
+  font-family: var(--font-mono);
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--ink-2);
+  margin: 0;
+}
+.ai-buddy .ai-instructions strong {
+  color: var(--clay-deep);
+  font-weight: 600;
+}
+.ai-buddy .ai-instructions em {
+  color: var(--ink);
+  font-style: normal;
+  font-weight: 600;
+}
