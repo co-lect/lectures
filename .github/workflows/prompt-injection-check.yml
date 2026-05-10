@@ -1,0 +1,96 @@
+name: Prompt Injection Guard
+
+# 受講者の AI（Claude Code 等）に "見えない指示" を埋め込む PR を弾く。
+# AI 向けに伝えたい内容は .ai-buddy ブロック等で必ず可視化する。
+# 詳細: CLAUDE.md > "プロンプトインジェクション対策"
+
+on:
+  pull_request:
+    paths:
+      - "**/*.html"
+      - "**/*.css"
+      - "**/*.js"
+
+jobs:
+  scan:
+    name: Scan PR for hidden AI-readable content
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Compute added lines
+        run: |
+          # Markdown はスコープ外 (CLAUDE.md 等の禁止パターン解説で誤検知するため)
+          # 脅威モデル: 受講者の AI が読む = 描画される HTML/CSS/JS のみ対象
+          git diff "origin/${{ github.base_ref }}...HEAD" \
+            -- '*.html' '*.css' '*.js' > /tmp/diff.patch || true
+          grep '^+' /tmp/diff.patch | grep -v '^+++' > /tmp/added.txt || true
+          echo "Added line count:"
+          wc -l /tmp/added.txt || true
+
+      - name: Scan for forbidden patterns
+        run: |
+          set +e
+          FAIL=0
+
+          flag() {
+            local desc="$1"
+            local pattern="$2"
+            local hits
+            hits=$(grep -nE "$pattern" /tmp/added.txt 2>/dev/null)
+            if [ -n "$hits" ]; then
+              {
+                echo "### Detected: ${desc}"
+                echo ""
+                echo '```'
+                echo "$hits"
+                echo '```'
+                echo ""
+              } >> "$GITHUB_STEP_SUMMARY"
+              FAIL=1
+            fi
+          }
+
+          flag "data-ai-* attribute (hidden AI annotation)" 'data-ai-[a-zA-Z-]+='
+          flag "<template> tag" '<template[ >]'
+          flag "CSS display:none" 'display[[:space:]]*:[[:space:]]*none'
+          flag "CSS visibility:hidden" 'visibility[[:space:]]*:[[:space:]]*hidden'
+          flag "HTML comment with AI keyword" '<!--[^>]*(AI|Claude|GPT|ChatGPT|ignore previous|prompt|instruction|jailbreak|system:)'
+          flag "JSON-LD script (machine-readable)" '<script[^>]*application/ld\+json'
+
+          # Zero-width / invisible Unicode (perl regex)
+          if grep -nP '[\x{200B}\x{200C}\x{200D}\x{2060}\x{FEFF}\x{180E}]' /tmp/added.txt > /tmp/zw.txt 2>/dev/null && [ -s /tmp/zw.txt ]; then
+            {
+              echo "### Detected: Zero-width / invisible Unicode characters"
+              echo ""
+              echo '```'
+              cat /tmp/zw.txt
+              echo '```'
+              echo ""
+            } >> "$GITHUB_STEP_SUMMARY"
+            FAIL=1
+          fi
+
+          if [ $FAIL -ne 0 ]; then
+            {
+              echo ""
+              echo "## Why this fails"
+              echo ""
+              echo "Lectures repo policy: **AI-readable content must be visible to humans.**"
+              echo ""
+              echo "Hidden patterns (display:none, data-ai-*, zero-width chars, suspicious comments)"
+              echo "can be used to inject prompts into students' AI assistants without their knowledge."
+              echo "Even with good intent, hidden AI instructions break the transparency invariant."
+              echo ""
+              echo "Fix: use the visible \`.ai-buddy\` class for AI Buddy blocks."
+              echo "If you have a legitimate need, open a Discussion before merging."
+              echo ""
+              echo "See \`CLAUDE.md\` > 'プロンプトインジェクション対策'."
+            } >> "$GITHUB_STEP_SUMMARY"
+            echo "::error::Hidden AI-readable content detected. See job summary."
+            exit 1
+          fi
+
+          echo "OK: no hidden AI-readable patterns detected in PR diff."

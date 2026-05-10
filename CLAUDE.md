@@ -115,6 +115,36 @@
 
 ---
 
+## プロンプトインジェクション対策
+
+このリポジトリの教材は、受講者の AI（Claude Code 等）が読む前提で書く。だからこそ「**AI に伝わる内容は人間にも見える**」を不変条件にする。
+
+### なぜ
+
+受講者の AI は本人の代理人であり、信頼の中心。第三者が PR で hidden な指示を埋め込めば、受講者は知らないうちに他人の指示を自分の AI で実行することになる。
+
+悪意の有無に関係なく禁止。「親切な誰か」が良かれと思って埋めた `data-ai-context` でも、本人の同意なしに AI を動かしている時点で構造的に injection と同じ。
+
+### 不変条件
+
+- AI 向けの命令・補足は **必ず `.ai-buddy`（または同等の可視ブロック）で書く**
+- 以下は **PR で禁止**：
+  - `data-ai-*` 属性
+  - `<template>` タグ
+  - `display:none` / `visibility:hidden` で隠した文字
+  - HTML コメント（`<!-- ... -->`）の中の AI 向けキーワード
+  - JSON-LD `<script type="application/ld+json">`
+  - Zero-width Unicode（U+200B 等）を使った隠し文字
+
+### 強制
+
+`.github/workflows/prompt-injection-check.yml` が PR の追加行を上記パターンで自動スキャンし、検出したら CI を fail させる。
+
+- スキャン対象は **追加行のみ**（既存コードは grandfather）
+- 例外が必要な場合は Discussion で先に議論する
+
+---
+
 ## 関連
 
 - `01-claude-code-intro/` — Lecture 01（最初の応用例）
