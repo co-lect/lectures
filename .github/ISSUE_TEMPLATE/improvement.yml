@@ -1,0 +1,38 @@
+name: 教材改善提案 (Improvement)
+description: スライドや構成の改善を提案する
+title: "[改善] "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        教材を良くする提案を歓迎します。修正案が具体的なら、Issue ではなく直接 Pull Request も歓迎です。
+
+  - type: input
+    id: target
+    attributes:
+      label: 改善対象（章 / スライド / ファイル）
+      placeholder: "例：00-about, スライド 3"
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: 現状の問題
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: 提案する変更
+    validations:
+      required: true
+
+  - type: textarea
+    id: rationale
+    attributes:
+      label: なぜそうすべきか（任意）
+    validations:
+      required: false
