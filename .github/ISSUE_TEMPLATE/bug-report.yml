@@ -7,6 +7,7 @@ body:
     attributes:
       value: |
         教材の **事実的な誤り** や **表示の不具合** を報告するためのテンプレートです。
+        修正が明確なら、Issue ではなく **直接 Pull Request** も歓迎します。
         「分からない」「詰まった」は Discussions の Q&A の方が適切です（自動的に誘導されます）。
 
   - type: input
