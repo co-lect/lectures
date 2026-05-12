@@ -1,0 +1,53 @@
+name: バグ報告 (Bug report)
+description: 教材の誤り・リンク切れ・スライド表示崩れなど、明確な不具合を報告する
+title: "[バグ] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        教材の **事実的な誤り** や **表示の不具合** を報告するためのテンプレートです。
+        「分からない」「詰まった」は Discussions の Q&A の方が適切です（自動的に誘導されます）。
+
+  - type: input
+    id: location
+    attributes:
+      label: どの Lecture / 章 / スライド / ファイル
+      placeholder: "例：01-claude-code-intro, スライド 5 / lecture.html L120"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: kind
+    attributes:
+      label: 種類
+      options:
+        - 誤字・誤情報
+        - リンク切れ
+        - スライド表示崩れ（overflow / レイアウトずれ）
+        - 数字・出典が古い
+        - その他
+    validations:
+      required: true
+
+  - type: textarea
+    id: detail
+    attributes:
+      label: 何が間違っているか
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: あるべき状態（任意）
+    validations:
+      required: false
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: 環境（表示崩れの場合のみ）
+      description: ブラウザ・OS・画面サイズなど
+    validations:
+      required: false
