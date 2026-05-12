@@ -94,20 +94,20 @@ cd lectures
 スライドの一部を別の資料で使う、講義に組み込む、改変して公開する — どの場合も以下の形でクレジットを残してください。
 
 ```
-"Lectures" by 渡邊康平 / 高知工科大学, licensed under CC BY 4.0.
-Source: https://github.com/watanabe-kohei-jp/lectures
+"Lectures" (https://github.com/watanabe-kohei-jp/lectures)
+by @watanabe-kohei-jp, licensed under CC BY 4.0.
 （必要に応じて）Modified from the original / 改変あり
 ```
 
-3 要素を含めれば書式は問いません：**① 作者名** / **② CC BY 4.0 へのリンク or 明示** / **③ オリジナルへのリンク**。改変している場合は「改変あり」も追加。
+3 要素を含めれば書式は問いません：**① 作者（GitHub アカウント名 or 個人で名乗っている名前）** / **② CC BY 4.0 へのリンク or 明示** / **③ オリジナルへのリンク**。改変している場合は「改変あり」も追加。
 
 サードパーティ素材の出典は [`CREDITS.md`](./CREDITS.md) を参照してください。
 
 ---
 
-## 著者
+## メンテナ
 
-渡邊康平 / 高知工科大学
+[@watanabe-kohei-jp](https://github.com/watanabe-kohei-jp)
 
 ---
 
