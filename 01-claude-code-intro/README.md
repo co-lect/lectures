@@ -72,4 +72,4 @@ AI コーディングシリーズ 第 1 回。Claude Code を中心に、Git/Git
 
 ## 関連
 
-- 旧 Lecture 01（Git/GitHub 入門・PPTx 版）: `../_archive/01-git-github/` — 没。レイアウト案やコマンド概念図は第 03 回で部分流用予定
+- ルート `../00-about/lecture.html` — このシリーズ全体の取説・Read me

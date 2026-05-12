@@ -101,4 +101,3 @@ cd lectures
 
 - [`CLAUDE.md`](./CLAUDE.md) — このリポジトリの運用方針（AI 向け / 人間向け両方）
 - [`shared/`](./shared/) — HTML スライドエンジン（`deck-stage.js`）とデザインシステム（`theme.css`）
-- [`_archive/`](./_archive/) — 旧 PPTx 版（参考、本リポジトリの方針転換前）

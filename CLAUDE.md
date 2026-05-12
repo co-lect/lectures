@@ -148,5 +148,4 @@
 ## 関連
 
 - `01-claude-code-intro/` — Lecture 01（最初の応用例）
-- `_archive/01-git-github/` — 旧 PPTx 版（参考。本リポジトリの方針転換前）
 - `shared/` — HTML スライドエンジン（`deck-stage.js`）と デザインシステム（`theme.css`）
