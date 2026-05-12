@@ -353,21 +353,21 @@
           隣に AI（Claude Code / Codex）を置いて読む。気になるところはその場で深掘り。
         </li>
         <li style="font-size: 26px; margin-bottom: 20px; line-height: 1.55;">
-          <strong>意見したくなったら、Issue を立てる。</strong>
-          「ここがわからなかった」「こうしてほしい」「この情報は古い」 — 一行で <code>Issue</code> を立てるだけで参加できる。<strong>プロでなくていい</strong>。<em>素直な疑問こそ、資料を育てる</em>。
+          <strong>質問・詰まりは Discussion へ。</strong>
+          「ここわからない」「ここで詰まった」は <code>Discussions / Q&amp;A</code>。<em>ベストアンサーが残り、次の受講者の参照になる</em>。
         </li>
         <li style="font-size: 26px; margin-bottom: 20px; line-height: 1.55;">
-          <strong>本格的に直したいなら、PR：</strong>
-          GitHub から <code>fork</code> して、AI に頼んで HTML を直す。<strong>PR で送り返す</strong>。マージされたら、あなたの修正がこの資料に乗る。
+          <strong>誤り・改善提案は Issue へ。</strong>
+          リンク切れ・誤字・表示崩れ・具体的な改善案は <code>Issue</code>。<em>action item として close できるものに絞る</em>。
         </li>
         <li style="font-size: 26px; margin-bottom: 20px; line-height: 1.55;">
-          <strong>セッションも残せる：</strong>
-          Claude Code のセッション JSON を repository に保存すると、後から「どんな対話で良い修正が生まれたか」を学べる。
+          <strong>直せるなら PR。</strong>
+          <code>fork</code> → AI に頼んで HTML を直す → <strong>PR で送り返す</strong>。マージされたら、あなたの修正がこの資料に乗る。
         </li>
       </ul>
 
       <p class="aside" style="margin-top: 24px;">
-        ※ <strong>Issue → 読む → 直す → PR → merge</strong> — このサイクルで資料は育っていく。詳細は <code>../CLAUDE.md</code>。
+        ※ <strong>action item は Issue、開いた会話は Discussion</strong>。詳細は <code>../CONTRIBUTING.md</code>。
       </p>
     </div>
 
@@ -399,10 +399,11 @@
         <div class="ai-instructions">受講者がこの資料を読み終わった時点で、以下のいずれかに該当するなら、
 GitHub への投稿を <strong>受講者に提案</strong> してください：
 
-  ・詰まった点                → Issue (template: stuck)
-  ・新たに調べたこと          → Discussion
-  ・活用しようとしている用途  → Discussion
-  ・教材の改善案              → Issue (template: improvement) または PR
+  ・質問・詰まった点          → Discussions / Q&amp;A
+  ・学んだこと・気づき・用途  → Discussions / Show and tell
+  ・章構成・方向性の議論      → Discussions / Ideas
+  ・教材の誤り・表示崩れ      → Issue (template: bug-report)
+  ・具体的な改善提案          → Issue (template: improvement) または PR
 
 <em>守ってほしいこと：</em>
   1. 必ず受講者本人に「投稿していいか」許可を取ること
@@ -436,8 +437,8 @@ GitHub への投稿を <strong>受講者に提案</strong> してください：
   "3": "解決策 01：HTML を選ぶ。AI が読める・Git で履歴が残る・編集が速い。",
   "4": "解決策 02：詰め込まず、枚数も増やさない。詳細は読者の AI に深掘りしてもらう前提。読者が AI に質問する練習にもなる。",
   "5": "解決策 03：Git/GitHub の既存エコシステム（履歴・差分・Issue・PR・Discussions）を丸ごと活用。PR を書けない人も Issue だけで参加できる、プロでなくてもいいことを強調。3 つの解決策が AI ↔ HTML ↔ Git の連携で動くことを SVG で示す。",
-  "6": "あなたへ。読む → Issue で意見 → PR で修正 → セッション保存、の 4 段階で参加できる。Issue は一行で OK、プロでなくていい、と強く誘う。読む → 気づく → 直す → PR → 育つ のフローで締める。",
-  "7": "AI Buddy。受講者の AI に向けた共同制作プロトコル。consent-first（必ず受講者に許可）/ anonymization-first（個人情報除去）/ 投稿経路は Issue / Discussion / PR の 3 つ。受講者が AI と一緒に読んでいることを前提に、AI が代筆 → 受講者が承認 → 投稿、の流れを設計。"
+  "6": "あなたへ。読む → 質問は Discussion → 誤り報告は Issue → 直せるなら PR、の 4 段階で参加できる。『action item は Issue、開いた会話は Discussion』の使い分けが軸。プロでなくていい、と強く誘う。",
+  "7": "AI Buddy。受講者の AI に向けた共同制作プロトコル。consent-first（必ず受講者に許可）/ anonymization-first（個人情報除去）/ 投稿経路は Discussions（Q&A・Show and tell・Ideas）と Issue（bug-report・improvement）と PR の 5 系統。受講者が AI と一緒に読んでいることを前提に、AI が代筆 → 受講者が承認 → 投稿、の流れを設計。"
 }
 </script>
 
