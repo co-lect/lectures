@@ -116,5 +116,4 @@ by @watanabe-kohei-jp, licensed under CC BY 4.0.
 - [`CLAUDE.md`](./CLAUDE.md) — このリポジトリの運用方針（AI 向け / 人間向け両方）
 - [`CONTRIBUTING.md`](./CONTRIBUTING.md) — 貢献ガイド（Issue / Discussion / PR の使い分け）
 - [`CREDITS.md`](./CREDITS.md) — サードパーティ素材の出典
-- [`SECURITY.md`](./SECURITY.md) — セキュリティ報告経路
 - [`shared/`](./shared/) — HTML スライドエンジン（`deck-stage.js`）とデザインシステム（`theme.css`）
