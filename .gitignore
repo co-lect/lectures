@@ -23,3 +23,15 @@ __pycache__/
 
 # --- 旧 PPTx（HTML 路線へ移行済み、新規 PPTx は受け付けない） ---
 *.pptx
+
+# --- 未使用の制作物アセット（実際に lecture.html から参照されているものだけ track する） ---
+# 過去の制作 / 試作画像は手元には残してリポでは track しない。
+01-claude-code-intro/_assets/horse-harness.png
+01-claude-code-intro/_assets/model-service-layers.png
+01-claude-code-intro/_assets/model-service-layers-v2.png
+01-claude-code-intro/_assets/persona-bl.png
+01-claude-code-intro/_assets/persona-br.png
+01-claude-code-intro/_assets/persona-tl.png
+01-claude-code-intro/_assets/persona-tr.png
+01-claude-code-intro/_assets/personas-4-quadrants.png
+01-claude-code-intro/_assets/pptx_slide_what_actually_got_captured.png
