@@ -1,1 +1,11 @@
 blank_issues_enabled: false
+contact_links:
+  - name: 質問・詰まり相談 (Q&A)
+    url: https://github.com/watanabe-kohei-jp/lectures/discussions/new?category=q-a
+    about: 「分からない」「詰まった」は Discussions の Q&A へ。AI と一緒に考えた仮説まで添えると回答が早いです。
+  - name: 学んだこと・応用事例 (Show and tell)
+    url: https://github.com/watanabe-kohei-jp/lectures/discussions/new?category=show-and-tell
+    about: 「こう使った」「ここが面白かった」「学習ログ」は Discussions の Show and tell へ。
+  - name: 構成・方向性の議論 (Ideas)
+    url: https://github.com/watanabe-kohei-jp/lectures/discussions/new?category=ideas
+    about: 章構成や教材の方向性に関する開いた議論は Discussions の Ideas へ。
