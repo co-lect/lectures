@@ -33,7 +33,10 @@
 
       sections.forEach(function (s, i) {
         var step = document.createElement('div');
-        step.className = 'ps-step' + (i === idx ? ' active' : '');
+        // data-kind="main" のスライド（各章本題）はクレイ色で強調する
+        step.className = 'ps-step'
+          + (i === idx ? ' active' : '')
+          + (s.dataset.kind === 'main' ? ' main' : '');
 
         var dot = document.createElement('div');
         dot.className = 'ps-dot';

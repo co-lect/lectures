@@ -67,6 +67,12 @@ cd lectures
 
 詳しくは各章末スライド、または [`CLAUDE.md`](./CLAUDE.md) を参照してください。
 
+### 貢献者の名前は残る
+
+PR で資料を直した人の名前は、その章の Credits スライド・章の `README.md`・GitHub の履歴に永続的に残ります。継続的に貢献する人には Role（Contributor / Core Contributor / Maintainer）がつき、[`CONTRIBUTORS.md`](./CONTRIBUTORS.md) に掲載されます。
+
+これは「ノウハウを分かりやすく人に伝えられる」ことの、公開された証跡になります。Role の意味と推薦方法は [`CONTRIBUTING.md`](./CONTRIBUTING.md) を参照してください。
+
 ---
 
 ## このリポジトリの不変条件

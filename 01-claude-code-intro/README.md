@@ -26,7 +26,7 @@ AI コーディングシリーズ 第 1 回。Claude Code を中心に、Git/Git
 
 ## 全体構成
 
-全 11 枚。**主張 → 具体理由** の流れで構成、「PC を AI が操作する道具」フレームに統一。
+全 12 枚。**主張 → 具体理由** の流れで構成、「PC を AI が操作する道具」フレームに統一。
 
 ### 設計方針
 
@@ -51,6 +51,7 @@ AI コーディングシリーズ 第 1 回。Claude Code を中心に、Git/Git
 | 09 | Ch.7 | 結論 — 数年後、これが標準になる |
 | 10 | Coda | 終わりに — 続きは触ってから |
 | 11 | AI Buddy | AI Buddy — 一緒に育てる（受講者の AI に GitHub 貢献を提案するプロトコル） |
+| 12 | Credits | Credits — この資料に関わった人（PR 貢献者の名前掲載） |
 
 ### 関連
 
@@ -73,3 +74,11 @@ AI コーディングシリーズ 第 1 回。Claude Code を中心に、Git/Git
 ## 関連
 
 - ルート `../00-about/lecture.html` — このシリーズ全体の取説・Read me
+
+## Authors
+
+| 役割 | 名前 | 貢献 |
+|---|---|---|
+| Initial author | [@watanabe-kohei-jp](https://github.com/watanabe-kohei-jp) | 章全体の構成・執筆 |
+
+> このセクションは PR 単位で追加されます。修正・改善した方は、PR でこの表に行を追加してください。Role に関係なく、貢献した資料に名前を入れて OK です。

@@ -710,6 +710,10 @@ code, .mono {
   background: var(--rule);
   flex-shrink: 0;
 }
+/* 本題（各章）のドットはクレイ色で塗る。それ以外（Cover/Coda/AI Buddy/Credits）は薄いグレーのまま */
+.ps-step.main .ps-dot {
+  background: var(--clay);
+}
 .ps-step.active .ps-dot {
   background: var(--clay);
   width: 9px;
@@ -727,6 +731,39 @@ code, .mono {
 .ps-step.active .ps-label {
   color: var(--clay-deep);
   font-weight: 600;
+}
+
+/* ============================================================
+ * Credits list (章末 Credits スライドの貢献者一覧)
+ * 名前が増えても多段組みで流れるよう column 指定。
+ * ============================================================ */
+.credits-author {
+  font-family: var(--font-sans);
+  font-size: 19px;
+  color: var(--ink);
+  margin: 8px 0 0 0;
+}
+.credits-list {
+  list-style: none;
+  margin: 12px 0 0 0;
+  padding: 0;
+  column-count: 3;
+  column-gap: 48px;
+}
+.credits-list li {
+  font-family: var(--font-sans);
+  font-size: 19px;
+  color: var(--ink);
+  padding: 7px 0;
+  break-inside: avoid;
+}
+.credits-list li a {
+  color: var(--clay-deep);
+  text-decoration: none;
+}
+.credits-empty {
+  color: var(--ink-mute);
+  font-style: italic;
 }
 
 /* ============================================================
