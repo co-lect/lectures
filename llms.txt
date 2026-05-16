@@ -1,0 +1,17 @@
+# Lectures — AI と人間が共同編集する教材
+
+> AI コーディング（Claude Code 等）を中心に、AI 時代の学び方を扱う HTML スライド教材シリーズ。散在しがちな情報を 1 か所に集約した、Git で進化し続ける「最新の地図」を目指す。CC-BY-4.0 で公開。
+
+スライド本体は概要と主張だけを持ち、詳細は読者の AI（Claude Code / ChatGPT 等）に委ねる設計。各回の HTML は人間と AI が一緒に読むことを前提に書かれている。古い記述は Issue / PR で直し続ける運用。
+
+## 講義
+
+- [00 Read me](https://watanabe-kohei-jp.github.io/lectures/00-about/lecture.html): 教材シリーズの設計思想と歩き方。1 年で陳腐化する世界で資料をどう作るか（9 枚）
+- [01 なぜ今、Claude Code を学ぶのか](https://watanabe-kohei-jp.github.io/lectures/01-claude-code-intro/lecture.html): AI コーディングの全体像、ツールの正体、人の立ち位置の変化（12 枚）
+
+## メタ
+
+- [README](https://github.com/watanabe-kohei-jp/lectures/blob/main/README.md): プロジェクト全体像・読み方・ライセンス
+- [CONTRIBUTING](https://github.com/watanabe-kohei-jp/lectures/blob/main/CONTRIBUTING.md): 貢献の入口と Role
+- [CLAUDE.md](https://github.com/watanabe-kohei-jp/lectures/blob/main/CLAUDE.md): リポジトリの運用方針（人間向け / AI 向け）
+- [リポジトリ](https://github.com/watanabe-kohei-jp/lectures): ソースと全履歴

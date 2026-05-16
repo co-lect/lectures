@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://watanabe-kohei-jp.github.io/lectures/sitemap.xml

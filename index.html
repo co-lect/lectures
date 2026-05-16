@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lectures — AI と人間が共同編集する教材</title>
+<meta name="description" content="AI コーディング（Claude Code 等）を中心に、散在しがちな情報を 1 か所に集約した「最新の地図」を目指す HTML スライド教材シリーズ。AI と人間が Git 上で共同編集する。CC-BY-4.0。">
+<meta name="author" content="@watanabe-kohei-jp">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Lectures — AI と人間が共同編集する教材">
+<meta property="og:description" content="AI コーディングを中心に、最新かつ網羅的な「地図」を目指す HTML スライド教材シリーズ。">
+<meta property="og:url" content="https://watanabe-kohei-jp.github.io/lectures/">
+
+<link rel="stylesheet" href="shared/theme.css">
+<style>
+  body {
+    font-family: var(--font-sans);
+    color: var(--ink);
+    background: var(--cream);
+    line-height: 1.8;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 680px; margin: 0 auto; padding: 96px 28px 120px; }
+  h1 {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 2.3rem;
+    line-height: 1.3;
+    margin: 0 0 12px;
+  }
+  .tagline { color: var(--ink-mute); font-size: 1.05rem; margin: 0 0 8px; }
+  .lead { font-size: 1.02rem; margin: 28px 0 0; }
+  h2 {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    font-size: 1.25rem;
+    margin: 56px 0 16px;
+  }
+  a { color: var(--clay-deep); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  ul.map { list-style: none; padding: 0; margin: 0; }
+  ul.map li { border-top: 1px solid var(--rule); padding: 18px 0; }
+  ul.map li:last-child { border-bottom: 1px solid var(--rule); }
+  ul.map .title { font-family: var(--font-serif); font-size: 1.15rem; font-weight: 600; }
+  ul.map .desc { color: var(--ink-mute); font-size: 0.92rem; margin-top: 4px; }
+  .note {
+    background: var(--clay-haze);
+    border-left: 3px solid var(--clay);
+    padding: 16px 20px;
+    font-size: 0.95rem;
+    margin: 16px 0 0;
+  }
+  footer {
+    border-top: 1px solid var(--rule);
+    margin-top: 64px;
+    padding-top: 24px;
+    color: var(--ink-mute);
+    font-size: 0.85rem;
+  }
+  footer a { color: var(--ink-mute); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Lectures</h1>
+  <p class="tagline">AI と人間が共同編集する、Git で生きている教材シリーズ</p>
+
+  <p class="lead">
+    AI コーディング（Claude Code 等）を中心に、散在しがちな情報を 1 か所に集約した
+    <strong>最新の地図</strong> になることを目指す教材です。スライドは凍結された PDF ではなく、
+    Git で進化し続ける HTML。受講者と AI が一緒に読み、必要なら直接編集して PR を投げられます。
+  </p>
+
+  <h2>講義</h2>
+  <ul class="map">
+    <li>
+      <a class="title" href="00-about/lecture.html">00 — Read me</a>
+      <div class="desc">教材シリーズの設計思想と歩き方。1 年で陳腐化する世界で、資料をどう作るか（9 枚）</div>
+    </li>
+    <li>
+      <a class="title" href="01-claude-code-intro/lecture.html">01 — なぜ今、Claude Code を学ぶのか</a>
+      <div class="desc">AI コーディングの全体像、ツールの正体、人の立ち位置の変化（12 枚）</div>
+    </li>
+  </ul>
+
+  <h2>鮮度について</h2>
+  <p class="note">
+    AI 周辺は変化が速く、この資料も古くなります。数字や主張には as-of 日付を付け、
+    正本の「最終更新」は Git の履歴が答えです。最新の詳細は手元の AI に聞く前提で、
+    スライドは骨格と主張だけを持ちます。
+  </p>
+
+  <h2>一緒に作る</h2>
+  <p>
+    受講者も貢献者です。詰まった点・誤り・改善案は Issue へ、直接の修正は Pull Request へ。
+    詳しくは
+    <a href="https://github.com/watanabe-kohei-jp/lectures#readme">README</a>
+    と
+    <a href="https://github.com/watanabe-kohei-jp/lectures/blob/main/CONTRIBUTING.md">CONTRIBUTING</a>
+    を参照してください。
+  </p>
+
+  <footer>
+    コンテンツは <a href="https://creativecommons.org/licenses/by/4.0/">CC-BY-4.0</a> で公開。
+    プロジェクト名・ブランドはライセンスの対象外です。<br>
+    ソースと全履歴：<a href="https://github.com/watanabe-kohei-jp/lectures">github.com/watanabe-kohei-jp/lectures</a>
+  </footer>
+
+</div>
+</body>
+</html>
