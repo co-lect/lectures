@@ -66,10 +66,48 @@
 
 詳細は [`CLAUDE.md`](./CLAUDE.md) > プロンプトインジェクション対策。
 
+## 新しい教材を投稿するには
+
+### 1. フォルダ構造を確認する
+
+```
+content/
+├── claude-code/     Claude Code の機能・使い方
+├── claude-api/      Claude API の活用
+├── ai-workflows/    ツール横断・実務への応用
+└── other-tools/     Cursor, Copilot など
+```
+
+### 2. テンプレートをコピーする
+
+```bash
+# スライド教材の場合
+cp -r _templates/slides content/<カテゴリ>/<フォルダ名>
+
+# 記事の場合
+cp -r _templates/article content/<カテゴリ>/<フォルダ名>
+```
+
+フォルダ名は `kebab-case`（例：`hooks-basics`、`mcp-setup`）。
+
+### 3. README.md のメタデータを埋める
+
+```yaml
+---
+title: 教材タイトル
+author: "@your-github-handle"
+tags: [claude-code, hooks]
+level: beginner        # beginner / intermediate / advanced
+type: slides           # slides / article
+---
+```
+
+### 4. PR を出す
+
 ## PR ワークフロー
 
 1. このリポジトリを fork
-2. ブランチを作成（`fix/typo-slide-05` のように内容がわかる名前）
+2. ブランチを作成（`feat/claude-code-hooks-basics` のように内容がわかる名前）
 3. 変更を commit
 4. PR を作成、本文に変更の概要と理由を書く
 5. CI が green になることを確認
