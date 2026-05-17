@@ -67,23 +67,23 @@ def inline(html: str, base_dir: Path) -> str:
         html,
     )
 
-    # 2. <script src="..."></script> → <script>...</script>
-    #    （defer 属性は落ちるが、progress-strip.js は readyState を自前で
-    #     ガードしており、deck-stage.js は head 配置で問題ない）
+    # 2. <script src="..."> の開始タグだけを差し替え、ソースを流し込む。
+    #    元の </script> はそのまま残り、インライン化したスクリプトを閉じる。
+    #    （終了タグを正規表現で扱わないことで、script 要素全体をマッチする
+    #     脆い正規表現パターンを避ける）
+    #    defer 属性は落ちるが、progress-strip.js は readyState を自前で
+    #    ガードしており、deck-stage.js は head 配置で問題ない。
     def js_repl(m: re.Match) -> str:
         src = m.group("src")
         if not is_local(src):
             return m.group(0)
         js = resolve(src).read_text(encoding="utf-8-sig")
-        return f"<script>\n{js}\n</script>"
+        # JS 内に "</script" があると HTML パーサが script を誤って閉じる。
+        # "<\/script" は JS 上は等価（文字列・正規表現・コメントいずれでも安全）。
+        js = js.replace("</script", "<\\/script")
+        return f"<script>\n{js}\n"
 
-    # 終了タグは `</script >`（空白入り）や大文字も許容する
-    html = re.sub(
-        r'<script\s+src="(?P<src>[^"]+)"[^>]*>\s*</\s*script\s*>',
-        js_repl,
-        html,
-        flags=re.IGNORECASE,
-    )
+    html = re.sub(r'<script\s+src="(?P<src>[^"]+)"[^>]*>', js_repl, html)
 
     # 3. <img ... src="..."> のローカル画像 → data URI
     def img_repl(m: re.Match) -> str:
