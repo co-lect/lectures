@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://watanabe-kohei-jp.github.io/lectures/sitemap.xml
+Sitemap: https://co-lect.github.io/lectures/sitemap.xml

@@ -65,4 +65,4 @@
 ## 追加・修正
 
 新しい素材を加えた人は、このファイルにも 1 行加えてください。
-不明な点があれば [Discussions](https://github.com/watanabe-kohei-jp/lectures/discussions) で相談してください。
+不明な点があれば [Discussions](https://github.com/co-lect/lectures/discussions) で相談してください。
