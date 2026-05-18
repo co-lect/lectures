@@ -936,3 +936,29 @@ code, .mono {
   font-style: normal;
   font-weight: 600;
 }
+
+/* この章の焦点 — cover の data-label から ai-focus.js が動的に注入 */
+.ai-focus {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-top: 22px;
+  padding: 16px 22px;
+  background: var(--clay-haze);
+  border-left: 4px solid var(--clay);
+  border-radius: 4px;
+}
+.ai-focus-label {
+  flex: none;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--clay-deep);
+}
+.ai-focus-value {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  line-height: 1.5;
+  color: var(--ink);
+}

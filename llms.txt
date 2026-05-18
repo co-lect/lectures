@@ -6,8 +6,8 @@
 
 ## 講義
 
-- [00 Read me](https://co-lect.github.io/lectures/00-about/): 教材シリーズの設計思想と歩き方。1 年で陳腐化する世界で資料をどう作るか（9 枚）
-- [01 なぜ今、Claude Code を学ぶのか](https://co-lect.github.io/lectures/01-claude-code-intro/): AI コーディングの全体像、ツールの正体、人の立ち位置の変化（12 枚）
+- [00 Read me](https://co-lect.github.io/lectures/00-about/): 教材シリーズの設計思想と歩き方。1 年で陳腐化する世界で資料をどう作るか（10 枚）
+- [01 なぜ今、Claude Code を学ぶのか](https://co-lect.github.io/lectures/01-claude-code-intro/): AI コーディングの全体像、ツールの正体、人の立ち位置の変化（13 枚）
 
 ## メタ
 
