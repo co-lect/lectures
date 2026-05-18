@@ -3,13 +3,22 @@ name: Prompt Injection Guard
 # 受講者の AI（Claude Code 等）に "見えない指示" を埋め込む PR を弾く。
 # AI 向けに伝えたい内容は .ai-buddy ブロック等で必ず可視化する。
 # 詳細: CLAUDE.md > "プロンプトインジェクション対策"
+#
+# 走査は 2 層:
+#   1. 構造走査    — zero-width / 不可視 Unicode・bidi 制御文字。全テキストファイル対象。
+#                    誤検知ほぼ皆無。
+#   2. キーワード走査 — data-ai-* / <template> / JSON-LD / インライン display:none 等。
+#                    HTML/CSS/JS/SVG のみ対象（誤検知を避けるため）。
+#
+# 例外: 行に "pi-allow: <理由>" を可視で書くと、その行は走査から除外される。
+# このワークフロー自身は禁止パターンを文字列として含むため、両走査の対象外。
+#
+# トリガーは全 PR（paths フィルタなし）。必須ステータスチェックとして使うため、
+# 「スキップされて Pending のまま」になるのを避ける。対象外の PR でもジョブは
+# 走り、検出が無ければ Success を返す。
 
 on:
   pull_request:
-    paths:
-      - "**/*.html"
-      - "**/*.css"
-      - "**/*.js"
 
 jobs:
   scan:
@@ -22,24 +31,31 @@ jobs:
 
       - name: Compute added lines
         run: |
-          # Markdown はスコープ外 (CLAUDE.md 等の禁止パターン解説で誤検知するため)
-          # 脅威モデル: 受講者の AI が読む = 描画される HTML/CSS/JS のみ対象
-          git diff "origin/${{ github.base_ref }}...HEAD" \
-            -- '*.html' '*.css' '*.js' > /tmp/diff.patch || true
-          grep '^+' /tmp/diff.patch | grep -v '^+++' > /tmp/added.txt || true
-          echo "Added line count:"
-          wc -l /tmp/added.txt || true
+          BASE="origin/${{ github.base_ref }}"
+          SELF=':(exclude).github/workflows/prompt-injection-check.yml'
 
-      - name: Scan for forbidden patterns
+          # 構造走査用: 全テキストファイルの追加行（バイナリは +行 を持たないので自然に除外）
+          git diff "$BASE...HEAD" -- . "$SELF" > /tmp/diff-all.patch || true
+          grep '^+' /tmp/diff-all.patch | grep -v '^+++' \
+            | grep -v 'pi-allow:' > /tmp/added-all.txt || true
+
+          # キーワード走査用: HTML/CSS/JS/SVG の追加行のみ
+          git diff "$BASE...HEAD" -- '*.html' '*.css' '*.js' '*.svg' "$SELF" \
+            > /tmp/diff-markup.patch || true
+          grep '^+' /tmp/diff-markup.patch | grep -v '^+++' \
+            | grep -v 'pi-allow:' > /tmp/added-markup.txt || true
+
+          echo "structural scan lines: $(wc -l < /tmp/added-all.txt)"
+          echo "keyword scan lines:    $(wc -l < /tmp/added-markup.txt)"
+
+      - name: Scan
         run: |
           set +e
           FAIL=0
 
           flag() {
-            local desc="$1"
-            local pattern="$2"
-            local hits
-            hits=$(grep -nE "$pattern" /tmp/added.txt 2>/dev/null)
+            local desc="$1" pattern="$2" file="$3" hits
+            hits=$(grep -nE "$pattern" "$file" 2>/dev/null)
             if [ -n "$hits" ]; then
               {
                 echo "### Detected: ${desc}"
@@ -53,17 +69,12 @@ jobs:
             fi
           }
 
-          flag "data-ai-* attribute (hidden AI annotation)" 'data-ai-[a-zA-Z-]+='
-          flag "<template> tag" '<template[ >]'
-          flag "CSS display:none" 'display[[:space:]]*:[[:space:]]*none'
-          flag "CSS visibility:hidden" 'visibility[[:space:]]*:[[:space:]]*hidden'
-          flag "HTML comment with AI keyword" '<!--[^>]*(AI|Claude|GPT|ChatGPT|ignore previous|prompt|instruction|jailbreak|system:)'
-          flag "JSON-LD script (machine-readable)" '<script[^>]*application/ld\+json'
-
-          # Zero-width / invisible Unicode (perl regex)
-          if grep -nP '[\x{200B}\x{200C}\x{200D}\x{2060}\x{FEFF}\x{180E}]' /tmp/added.txt > /tmp/zw.txt 2>/dev/null && [ -s /tmp/zw.txt ]; then
+          # ── 1. 構造走査（全テキストファイル）──────────────────────
+          # zero-width / 不可視 Unicode・bidi 制御文字。誤検知ほぼ皆無。
+          if grep -nP '[\x{200B}\x{200C}\x{200D}\x{2060}\x{FEFF}\x{180E}\x{202A}-\x{202E}\x{2066}-\x{2069}]' \
+               /tmp/added-all.txt > /tmp/zw.txt 2>/dev/null && [ -s /tmp/zw.txt ]; then
             {
-              echo "### Detected: Zero-width / invisible Unicode characters"
+              echo "### Detected: Zero-width / bidi / invisible Unicode characters"
               echo ""
               echo '```'
               cat /tmp/zw.txt
@@ -73,6 +84,24 @@ jobs:
             FAIL=1
           fi
 
+          # ── 2. キーワード走査（HTML/CSS/JS/SVG のみ）──────────────
+          flag "data-ai-* attribute (hidden AI annotation)" \
+               'data-ai-[a-zA-Z-]+=' /tmp/added-markup.txt
+          flag "<template> tag" \
+               '<template[ >]' /tmp/added-markup.txt
+          flag "JSON-LD script (machine-readable)" \
+               '<script[^>]*application/ld\+json' /tmp/added-markup.txt
+          # display:none / visibility:hidden は dual-use（stylesheet では正当）。
+          # インライン style 属性に直接書かれた場合のみ弾く＝隠しコンテンツの実害箇所。
+          flag "inline style display:none (hidden content)" \
+               'style[[:space:]]*=[^>]*display[[:space:]]*:[[:space:]]*none' /tmp/added-markup.txt
+          flag "inline style visibility:hidden (hidden content)" \
+               'style[[:space:]]*=[^>]*visibility[[:space:]]*:[[:space:]]*hidden' /tmp/added-markup.txt
+          # 単なる "AI" 言及ではなく injection 的な命令フレーズを含むコメントのみ
+          flag "comment with injection-style instruction" \
+               '<!--[^>]*([Ii]gnore (previous|prior|above)|[Dd]isregard (the )?(previous|above)|[Ss]ystem[[:space:]]*:|[Yy]ou are now|[Nn]ew instructions?|jailbreak)' \
+               /tmp/added-markup.txt
+
           if [ $FAIL -ne 0 ]; then
             {
               echo ""
@@ -80,12 +109,15 @@ jobs:
               echo ""
               echo "Lectures repo policy: **AI-readable content must be visible to humans.**"
               echo ""
-              echo "Hidden patterns (display:none, data-ai-*, zero-width chars, suspicious comments)"
-              echo "can be used to inject prompts into students' AI assistants without their knowledge."
-              echo "Even with good intent, hidden AI instructions break the transparency invariant."
+              echo "Hidden patterns (zero-width chars, data-ai-*, inline display:none,"
+              echo "injection-style comments) can push prompts into students' AI assistants"
+              echo "without their knowledge. Even with good intent, hidden AI instructions"
+              echo "break the transparency invariant."
               echo ""
               echo "Fix: use the visible \`.ai-buddy\` class for AI Buddy blocks."
-              echo "If you have a legitimate need, open a Discussion before merging."
+              echo "If a match is a legitimate, visible example, add \`pi-allow: <reason>\`"
+              echo "to that line (the marker is visible, so reviewers still see it)."
+              echo "For anything else, open a Discussion before merging."
               echo ""
               echo "See \`CLAUDE.md\` > 'プロンプトインジェクション対策'."
             } >> "$GITHUB_STEP_SUMMARY"
