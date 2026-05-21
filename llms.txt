@@ -8,6 +8,8 @@
 
 - [00 Read me](https://co-lect.github.io/lectures/00-about/): 教材シリーズの設計思想と歩き方。1 年で陳腐化する世界で資料をどう作るか（9 枚）
 - [01 なぜ今、Claude Code を学ぶのか](https://co-lect.github.io/lectures/01-claude-code-intro/): AI コーディングの全体像、ツールの正体、人の立ち位置の変化（12 枚）
+- [02 Claude Code 環境構築](https://co-lect.github.io/lectures/02-setup/): プランの選択からインストール・認証・初起動まで（12 枚）
+- [03 CLAUDE.md でプロジェクトを記憶させる](https://co-lect.github.io/lectures/03-claude-md/): 毎回の説明をゼロにする CLAUDE.md の書き方・置き場所・効果的な 3 パターン（12 枚）
 
 ## メタ
 
