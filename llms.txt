@@ -1,13 +1,15 @@
-# Lectures — AI と人間が共同編集する教材
+# Lectures — Claude Code を業務で使う日本語エンジニアのための実戦ガイド
 
-> AI コーディング（Claude Code 等）を中心に、AI 時代の学び方を扱う HTML スライド教材シリーズ。散在しがちな情報を 1 か所に集約した、Git で進化し続ける「最新の地図」を目指す。CC-BY-4.0 で公開。
+> 業務で Claude Code を使い始める日本語エンジニアのための、Git で進化する実戦ガイド。環境構築から日常運用まで、AI と人間が共同編集して最新に保つ。CC-BY-4.0 で公開。
 
-スライド本体は概要と主張だけを持ち、詳細は読者の AI（Claude Code / ChatGPT 等）に委ねる設計。各回の HTML は人間と AI が一緒に読むことを前提に書かれている。古い記述は Issue / PR で直し続ける運用。
+スライド本体は概要と主張だけを持ち、詳細は読者の AI（Claude Code 等）に委ねる設計。古い記述は Issue / PR で直し続ける運用。
 
 ## 講義
 
-- [00 Read me](https://co-lect.github.io/lectures/00-about/): 教材シリーズの設計思想と歩き方。1 年で陳腐化する世界で資料をどう作るか（10 枚）
+- [00 Read me](https://co-lect.github.io/lectures/00-about/): 教材シリーズの設計思想と歩き方（10 枚）
 - [01 なぜ今、Claude Code を学ぶのか](https://co-lect.github.io/lectures/01-claude-code-intro/): AI コーディングの全体像、ツールの正体、人の立ち位置の変化（13 枚）
+- [02 Claude Code 環境構築](https://co-lect.github.io/lectures/02-setup/): プランの選択からインストール・認証・初起動まで（13 枚）
+- [03 CLAUDE.md でプロジェクトを記憶させる](https://co-lect.github.io/lectures/03-claude-md/): 毎回の説明をゼロにする CLAUDE.md の使い方（13 枚）
 
 ## メタ
 
