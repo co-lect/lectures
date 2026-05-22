@@ -1,0 +1,27 @@
+name: Listings Sync Check
+
+# PR 用の verify-only。NN-slug/index.html の追加・変更があった際に
+# sitemap.xml / llms.txt / index.html / README.md の自動生成ブロックが
+# 同期されていなければ fail させる。
+# ローカルでの修正コマンド: python3 scripts/sync_listings.py --write
+#
+# 詳細: scripts/README.md
+
+on:
+  pull_request:
+
+jobs:
+  check:
+    name: Verify auto-generated listing blocks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Run sync_listings --check
+        run: python3 scripts/sync_listings.py --check
