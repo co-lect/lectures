@@ -8,6 +8,12 @@ shared/ の CSS・JS と、ローカル画像（qr.svg / _assets/*.png）を HTM
 正本は各章の index.html（shared/ 参照版）のまま。dist/ はビルド成果物で
 git 管理外。内容や shared/ を変更したら `python build.py` で再生成する。
 
+SEO / 重複コンテンツ対策:
+  完全版 HTML には `<link rel="canonical" href="編集用URL">` と
+  `<meta name="robots" content="noindex, follow">` を自動挿入する。
+  Pages 上で 2 系統の URL（章フォルダ / dist/）が同一コンテンツを返すため、
+  検索エンジンには編集用 URL を正本として扱わせる。
+
 既知の制約:
   theme.css は Google Fonts を @import している。完全オフラインでは
   Web フォントが読めず、システムフォントにフォールバックする
@@ -26,6 +32,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 DIST = ROOT / "dist"
+
+# Pages 上の編集用 URL のベース。完全版 HTML の canonical に使う。
+CANONICAL_BASE = "https://co-lect.github.io/lectures"
 
 # 外部 / data URI は埋め込み対象外（そのまま残す）
 _SKIP_PREFIXES = ("http://", "https://", "data:", "//")
@@ -97,6 +106,23 @@ def inline(html: str, base_dir: Path) -> str:
     return html
 
 
+def inject_seo_meta(html: str, chapter_name: str) -> str:
+    """完全版 HTML に canonical と robots=noindex を </head> 直前に注入する。
+
+    編集用 URL（章フォルダ）が正本であることを検索エンジンに伝え、
+    完全版 URL（dist/<章名>.html）の重複 indexing を避ける。
+    """
+    canonical = f"{CANONICAL_BASE}/{chapter_name}/"
+    tags = (
+        f'<link rel="canonical" href="{canonical}">\n'
+        f'<meta name="robots" content="noindex, follow">\n'
+    )
+    if "</head>" in html:
+        return html.replace("</head>", tags + "</head>", 1)
+    # </head> が無いケースは想定外。head 解析より、検出して失敗させる方が安全
+    raise RuntimeError(f"{chapter_name}: </head> が見つからず canonical を挿入できません")
+
+
 def main() -> int:
     # Windows の既定コンソール（cp932）でも日本語を出せるようにする
     try:
@@ -116,6 +142,7 @@ def main() -> int:
     for ch in chapters:
         html = (ch / "index.html").read_text(encoding="utf-8-sig")
         built = inline(html, ch)
+        built = inject_seo_meta(built, ch.name)
 
         # 未解決のローカル参照（../ や _assets/）が残っていないか検証
         leftover = sorted(set(re.findall(

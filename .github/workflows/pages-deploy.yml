@@ -1,0 +1,73 @@
+name: Deploy GitHub Pages
+
+# main への push で Pages を自動デプロイする。
+#
+# 配信物は 2 系統:
+#   - 編集用: 章フォルダ・shared/・sitemap.xml 等（リポをそのまま）
+#   - 完全版: `python build.py` で生成した dist/<章名>.html
+#
+# 「Deploy from a branch」から「GitHub Actions」へ切り替える必要がある
+# （Settings → Pages → Source）。切替後は本ワークフローが唯一のデプロイ経路。
+#
+# PR では build-only ジョブだけ走らせ、build.py の破損を merge 前に検出する。
+# 詳細: Issue #33
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 同時デプロイは 1 件まで。in-progress を中断しないことで、進行中の deploy を守る。
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build standalone HTML
+        run: python3 build.py
+
+      - name: Stage site
+        # _site/ に編集用（リポ全体）+ 完全版（dist/）の両方を詰める。
+        # .git/.github/dist/_site は site 配信から除外。
+        run: |
+          mkdir -p _site
+          rsync -a --delete \
+            --exclude '.git' \
+            --exclude '.github' \
+            --exclude 'dist' \
+            --exclude '_site' \
+            ./ _site/
+          mkdir -p _site/dist
+          cp dist/*.html _site/dist/
+
+      - name: Upload Pages artifact
+        # PR では artifact をアップロードしない（deploy しないため）。
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    # PR では deploy しない。main への push / workflow_dispatch のみ。
+    if: github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

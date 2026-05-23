@@ -138,15 +138,36 @@ cd lectures
 
 ---
 
-## 完全版（1 ファイル）をビルドする
+## 完全版（1 ファイル）を入手する
 
-各章を 1 つの HTML にまとめた「完全版」を生成できます。`shared/` の CSS・JS と画像をすべて埋め込むので、**リポジトリもネット接続もなしで開けます**。メール添付・USB 配布・オフライン閲覧に。
+各章を 1 つの HTML にまとめた「完全版」が用意されています。`shared/` の CSS・JS と画像をすべて埋め込むので、**リポジトリもネット接続もなしで開けます**。メール添付・USB 配布・オフライン閲覧に。
+
+### 方法 1: ダウンロードする（推奨）
+
+CI が自動更新する常に最新版を Pages から取得できます。
+
+```
+https://co-lect.github.io/lectures/dist/00-about.html
+https://co-lect.github.io/lectures/dist/01-claude-code-intro.html
+https://co-lect.github.io/lectures/dist/02-setup.html
+https://co-lect.github.io/lectures/dist/03-claude-md.html
+```
+
+ブラウザで開いて右クリック →「名前を付けて保存」で `.html` 1 ファイルが手元に残ります。
+
+### 方法 2: 自分でビルドする
 
 ```bash
 python build.py
 ```
 
-`dist/00-about.html` などが生成されます（`dist/` は git 管理外のビルド成果物）。正本は各章の `index.html`（`shared/` 参照版）のままなので、`shared/` や本文を変更したら `python build.py` で作り直します。依存は Python 3 標準ライブラリのみ。
+`dist/00-about.html` などが生成されます（`dist/` は git 管理外のビルド成果物）。依存は Python 3 標準ライブラリのみ。
+
+### 注意
+
+- `dist/` は **ビルドの度に上書きされる**。直接編集しないこと
+- 配布前は **必ず `python build.py` を実行**するか、Pages の最新版を取得する
+- `dist/` は git 管理外（`.gitignore` 設定済み）。`git add -f` で強制追加しないこと
 
 > Web フォント（Google Fonts）だけは埋め込みません。完全オフラインではシステムフォントにフォールバックします（レイアウトは崩れません）。
 
