@@ -36,6 +36,13 @@ META_DESC_RE = re.compile(
     re.DOTALL,
 )
 SECTION_RE = re.compile(r"<section[\s>]")
+HTML_COMMENT_RE = re.compile(r"<!--.*?-->", re.DOTALL)
+
+
+def strip_html_comments(page: str) -> str:
+    """Remove HTML comments so TITLE_RE / META_DESC_RE / SECTION_RE do not
+    misfire on tag-like text quoted inside <!-- ... -->."""
+    return HTML_COMMENT_RE.sub("", page)
 
 
 def repo_root() -> Path:
@@ -119,7 +126,7 @@ def discover_lectures(root: Path) -> list[Lecture]:
                 f"ERROR: {child.name}/ matches the lecture naming pattern "
                 f"but has no index.html"
             )
-        page = idx.read_text(encoding="utf-8")
+        page = strip_html_comments(idx.read_text(encoding="utf-8"))
         lectures.append(Lecture(
             num=m.group(1),
             slug=m.group(2),
