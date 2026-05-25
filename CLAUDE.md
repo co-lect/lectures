@@ -49,6 +49,12 @@
 - AI 周辺は移り変わりが激しい。古くなったら直す、ではなく、**最初から "更新される前提" で設計**
 - HTML × Git × PR ベースの運用は、その変化への対応手段
 
+### 5. 講義一覧は自動同期する（手で更新しない）
+- 新しい講義 `NN-slug/index.html` を追加するだけで、`sitemap.xml` / `llms.txt` / ルート `index.html` / `README.md` の講義一覧ブロックが自動同期される
+- 真実源は各 `NN-slug/index.html` の `<title>` と `<meta name="description">`
+- 同期スクリプト: `python3 scripts/sync_listings.py --write`（PR では `--check` が CI 強制）
+- 詳細: [`scripts/README.md`](./scripts/README.md)
+
 ---
 
 ## 期待する効果（長期）
