@@ -100,7 +100,26 @@ commit に `Co-Authored-By: Name <email>` trailer を付けると、GitHub の C
 ### CI
 
 - **Prompt Injection Guard** が HTML/CSS/JS の追加行を自動スキャン
-- 失敗時は job summary に検出箇所が表示される
+- **Listings Sync Check** が `sitemap.xml` / `llms.txt` / `index.html` / `README.md` の講義一覧ブロックを検証
+- 失敗時は job summary に検出箇所・修正コマンドが表示される
+
+### 新しい Lecture を追加するとき
+
+`sitemap.xml` / `llms.txt` / `index.html`（ルート）/ `README.md` の講義一覧は **自動同期** されます。`NN-slug/index.html` の `<title>` と `<meta name="description">` から自動生成されるので、これらのファイルを手で編集する必要はありません。
+
+```bash
+# 講義ディレクトリを作って書く
+cp -r _template NN-slug
+# ... NN-slug/index.html を編集 ...
+
+# 4 つの listing ファイルを同期
+python3 scripts/sync_listings.py --write
+
+# 確認用
+python3 scripts/sync_listings.py --check
+```
+
+PR で同期し忘れた場合は CI（`sync-listings-check.yml`）が落とします。詳細は [`scripts/README.md`](./scripts/README.md)。
 
 ### 大きな変更の場合
 
